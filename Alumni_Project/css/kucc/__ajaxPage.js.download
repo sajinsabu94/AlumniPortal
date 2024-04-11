@@ -1,0 +1,3074 @@
+						/****************************************************************************************************
+						# 											Script Info												#
+						#===================================================================================================#
+						# File: 						__ajaxPage.js  														#
+						# Created: 						06/OCT/2009															#
+						# Modified: 																						#
+						# Author: 						Team kucc														#
+						# Project Name:					kucc_enrollment																#
+						# Development Center			kucc,University of Kerala, Thiruvananthapuram, Kerala, India.		#
+						# Website: 						http://www.kucc.keralauniversity.edu/												#
+						# Requirements: 				PHP 5 & above / MySQl 												#														
+						*****************************************************************************************************/
+
+	function JSfncGetXMLHttpRequest(){
+		var http_request = false;
+		if (window.XMLHttpRequest) { // Mozilla, Safari,...
+			http_request = new XMLHttpRequest();
+			if (http_request.overrideMimeType) {
+				http_request.overrideMimeType('text/html');
+			}
+		} else if (window.ActiveXObject) { // IE
+			try {
+				http_request = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					http_request = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {}
+			}
+		}
+		if (!http_request) {
+			return false;
+		}
+		return http_request;
+	}
+	
+
+ //vidhya
+
+
+
+
+function passwordreset(i)
+{
+ 
+ cospcod=document.getElementById('txtcospcod'+i).value;
+ 
+candcod=document.getElementById('txtregno'+i).value;
+
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divreg'+i).innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+
+		XmlReg.open('GET', 'getAjaxdetails.php?cospcod='+cospcod+'&candcod='+candcod+'&pwdre='+1, true);
+		XmlReg.send(null);
+
+
+}
+
+
+
+
+
+function listspecialization4pass(course)
+{//alert(course);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedlistspecialization4pass;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?Selcoursecode4pass='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedlistspecialization4pass(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('specialization').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+
+function getstudname(course,candidatecode)
+{
+	 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedstudname;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?candcode4pass='+candidatecode+'&course='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedstudname(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('studname').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+//mod
+
+
+	function getcoursewrtcl(colcod)
+{
+
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForCAEdit;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?clcd='+colcod, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedForCAEdit(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstcourse').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+	
+
+function getcolSubject(course)
+{
+	
+	
+
+	document.getElementById('txtcourse').value=course;
+ 
+	
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForSubjectCA;
+	  
+		XmlReg.open('GET', 'getAjaxdetails.php?cospsubj='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedForSubjectCA(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstsubject').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+	
+	
+	//---Result
+	function JSfncGetResultDetails(examcod,candcod)
+		{	
+	 
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForResult;		
+		XmlReg.open('GET', 'getAjaxdetailResult.php?examcod='+examcod+'&candcod='+candcod, true);
+		XmlReg.send(null);		
+	}
+
+function JSfncMyStateChangedForResult()
+{			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divShowResult').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+	}
+	
+	
+/* **************** start of Getting Caste name **************************/
+	
+	function JSfncGetCaste(codId){							
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForCaste;		
+		XmlReg.open('GET', 'getAjaxdetails.php?codId1='+codId, true);
+		XmlReg.send(null);		
+	}
+
+function JSfncMyStateChangedForCaste(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divShowCaste').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+	}
+	
+	
+	function JSfncGetCasteAdmn(codId,i)
+	{
+		//alert(document.getElementById('divShowCaste'+i));
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForAdmnCaste;		
+		XmlReg.open('GET', 'getAjaxdetails.php?regcodId1='+codId+'&i='+i, true);
+		XmlReg.send(null);		
+	}
+
+function JSfncMyStateChangedForAdmnCaste(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				var ele="divShowCaste"+i;
+				document.getElementById(ele).innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+}
+	/* **************** end of Getting Caste name **************************/
+	
+	/* **************** start of Getting University name **************************/
+	
+	function JSfncGetUniversity(codId){
+		//alert(codId);
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		//alert('hi from js page11');
+		XmlReg.onreadystatechange = JSfncMyStateChangedForUniversity;		
+		XmlReg.open('GET', 'getAjaxdetails.php?courseCode='+codId, true);
+		XmlReg.send(null);	
+	}
+	function JSfncMyStateChangedForUniversity(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divShowUniversity').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	}
+	function JSfncGetboard(boardId){
+		//alert(boardId);
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		//alert('hi from js page11');
+		XmlReg.onreadystatechange = JSfncMyStateChangedForBoard;		
+		XmlReg.open('GET', 'getAjaxdetails.php?boardid='+boardId, true);
+		XmlReg.send(null);	
+	}
+	function JSfncMyStateChangedForBoard(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divShowUniversity1').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	}
+	
+	
+	
+	
+	
+	function jsfuncshoqnewqualification(divId){		
+		divId_p = divId + 1;
+		//alert(divId);
+		if(divId == 0){
+			//alert('hello');
+			document.getElementById('divAddNew').style.visibility = 'hidden';
+			document.getElementById('divRemoveNew').style.visibility = 'hidden';
+		}else{
+			//alert(divId);
+			document.getElementById('divAddNew'+divId).style.visibility = 'hidden';
+			document.getElementById('divRemoveNew'+divId).style.visibility = 'hidden';
+		}
+		
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				if(divId == 0){
+				//alert('2');
+				document.getElementById('ShowQualificationAdd').innerHTML = XmlReg.responseText;
+				}else{
+					document.getElementById('ShowQualificationAdd'+divId).innerHTML = XmlReg.responseText;
+				}
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET', 'getAjaxdetails.php?divId='+divId_p, true);
+		XmlReg.send(null);	
+	}
+	function jsfuncRemoveqnewqualification(divId){
+		//alert('hi');
+		divId_p = divId - 1;
+		//alert(divId_p);
+		if(divId_p == 0){
+			document.getElementById('divAddNew').style.visibility = 'visible';
+		}else{
+			//alert('hello');
+			document.getElementById('divAddNew'+divId_p).style.visibility = 'visible';
+			document.getElementById('divRemoveNew'+divId_p).style.visibility = 'visible';
+		}
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		//alert('hi from js page11');
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				if(divId == 0){
+				//document.getElementById('divRemoveId').innerHTML = XmlReg.responseText;
+				}else{
+					document.getElementById('divRemoveId'+divId).innerHTML = XmlReg.responseText;
+				}
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET', 'getAjaxdetails.php?rmv='+divId_p, true);
+		XmlReg.send(null);	
+	}
+	
+	
+	/* **************** end of Getting University name **************************/
+	
+	/* **************** start of Getting student details for random verification**************************/	
+	
+	function JSfncGetRandomStudents(studId){
+		//alert('hi');
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		//alert('hi from js page11');
+		XmlReg.onreadystatechange = JSfncMyStateChangedForRandomStudent;		
+		XmlReg.open('GET', 'getAjaxdetails.php?studId='+studId, true);
+		XmlReg.send(null);	
+	}
+	function JSfncMyStateChangedForRandomStudent(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divShowRandomStudents').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	}
+	
+	
+	/* **************** end of Getting student details for random verification***************************/
+	
+	
+	
+	
+	/* **************** start of Getting specialization based on each course selected**************************/
+	
+	function fncShowSpecialization(courseid){							
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divShowSpec').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?courseid='+courseid, true);
+		XmlReg.send(null);		
+	}
+
+	/* **************** end of Getting specialization based on each course selected **************************/
+	
+	function fncShowCollegeListCourse(cospcod,coursecod,speccod,flag){
+		
+		 enrltype=document.getElementById('enrltype').value ;			   
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divShowCourseSelect').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?cospcod123='+cospcod+'&coursecod='+coursecod+'&speccod='+speccod+'&flg='+flag+'&enrltype='+ enrltype, true);
+		XmlReg.send(null);	
+	}
+	
+/*****************************************************/	
+	function fncShowCourseCollegeForUser(cospcod,coursecod,speccod,colcod,college,flag){		
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divShowCourseCollegeSelect').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?cospcod='+cospcod+'&coursecod='+coursecod+'&speccod='+speccod+'&colcod='+colcod+'&college='+college+'&flgad='+flag, true);
+		XmlReg.send(null);
+	}
+	
+	function JSfncGetCommunityDetails(castecod){   
+	//alert(castecod);
+   	   XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){			
+			if (XmlReg.readyState == 4) {
+				if (XmlReg.status == 200) {
+					document.getElementById('divShowCommunity').innerHTML = XmlReg.responseText;
+					if(document.getElementById('loading'))
+						document.getElementById('loading').style.display='none';
+				}
+			}else{
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='block';
+			}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?castecode='+castecod, true);
+		XmlReg.send(null);	
+   }//end of JSfncGetCommunityDetails
+   
+   function jsGetUserCodForSubject(electiveid,cnt){
+	    XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){			
+			if (XmlReg.readyState == 4) {
+				if (XmlReg.status == 200) {
+					document.getElementById('divShowUserCod'+cnt).innerHTML = XmlReg.responseText;
+					if(document.getElementById('loading'))
+						document.getElementById('loading').style.display='none';
+				}
+			}else{
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='block';
+			}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?electcode='+electiveid+'&cnt='+cnt, true);
+		XmlReg.send(null);	
+   }
+	
+	// to show scheme and sem for date settings of sem registrtaion
+	function fncShowSchemeSemForSemReg(thisValue){
+		if(thisValue == 2){
+			document.getElementById('divShowSchemeSemForSemReg').style.display='block';
+		}else{
+			document.getElementById('divShowSchemeSemForSemReg').style.display='none';
+		}
+	}
+	
+	function jsFncShowHideSubmenu(thisValue,flgVal){		
+		var flgMenuLevel = document.getElementById('flgMenuLevel').value;
+		var newMenuLevel = (flgVal * 1)+1;
+		var newMenuLevelToHide = (flgMenuLevel*1) - 1;
+		if(thisValue == 1){
+			if(flgMenuLevel > 1)
+		    	document.getElementById('divShowSubMenuLevel'+newMenuLevelToHide).style.display='none';
+			else
+			    document.getElementById('divShowSubMenuLevel1').style.display='none';
+		}else{			
+		//if(flgMenuLevel)
+		 XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){			
+			if (XmlReg.readyState == 4) {
+				if (XmlReg.status == 200) {
+					/*if(flgMenuLevel == 1){
+						document.getElementById('divShowSubMenuLevel').innerHTML = XmlReg.responseText;
+					}else{*/
+					 alert('inside');
+					  if(thisValue == 2){
+						  var newVal = (flgVal * 1)+1;
+						  alert(newVal);
+						document.getElementById('divShowSubMenuLevel'+newVal).innerHTML = XmlReg.responseText;				
+					document.getElementById('flgMenuLevel').value = (flgMenuLevel*1) + 1;
+					//var newMenuLevel = (flgMenuLevel*1);
+					}else{
+						document.getElementById('divShowSubMenuLevel'+newVal).innerHTML = XmlReg.responseText;				
+						if(flgMenuLevel > 1){
+						document.getElementById('flgMenuLevel').value = (flgMenuLevel*1) - 1;
+						var newMenuLevel = (flgMenuLevel*1) - 1;
+						}
+					}
+					if(document.getElementById('loading'))
+						document.getElementById('loading').style.display='none';
+				}
+			}else{
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='block';
+			}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?menulevel='+newMenuLevel+'&radioVal='+thisValue, true);
+		XmlReg.send(null);
+		}
+	}
+	
+function showID(num,cnt)
+{
+	
+	var fmnc=1;
+	//alert(fmnc);
+ XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){			
+			if (XmlReg.readyState == 4) {
+				if (XmlReg.status == 200) {
+					//alert("MM"+num);
+					document.getElementById('divshow').innerHTML = XmlReg.responseText;
+					if(document.getElementById('loading'))
+						document.getElementById('loading').style.display='none';
+				}
+			}else{
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='block';
+			}
+		};		
+		//alert(cnt);
+	    XmlReg.open('GET','getAjaxdetails.php?num='+num+'&cnt='+cnt+'&fmnc='+fmnc, true);
+		XmlReg.send(null);	
+}
+
+
+
+	
+//end of JSfncGetCommunityDetails
+	/*function chkPhoto(file)
+{
+	//alert(file);
+	xmlHttp=GetXmlHttpObject();
+	if (xmlHttp==null)  {
+	  alert ("Your browser does not support AJAX!");
+	  return;
+  	} 
+	var url=baseurl+"ajax/chkPhoto.php";
+	url=url+"?file="+file;
+	
+	//showLoadingMsg("divfeetable");	
+	xmlHttp.onreadystatechange=stateChangedchkPhoto;
+	xmlHttp.open("GET",url,true);
+	xmlHttp.send(null);
+}
+function stateChangedchkPhoto() 
+{ 
+	if (xmlHttp.readyState==4)	{ 
+	if(xmlHttp.responseText !="1") alert("Cannot Add photo, Please select an image of gif/jpg with 150X200 size"+xmlHttp.responseText);
+	//document.getElementById("imgdiv").innerHTML=xmlHttp.responseText;
+	}
+}*/
+	
+	
+	function fncGetnumberofReceipt(num,examcod)
+	{
+		//alert(examcod);
+		var regflg=1;
+	//alert(fmnc);
+      XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){			
+		//alert("1");
+			if (XmlReg.readyState == 4) {
+				if (XmlReg.status == 200) {
+					//alert("MM"+num);
+					document.getElementById('divshow').innerHTML = XmlReg.responseText;
+					if(document.getElementById('loading'))
+						document.getElementById('loading').style.display='none';
+				}
+			}else{
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='block';
+			}
+		};		
+		//alert(num);
+	    XmlReg.open('GET','getAjaxdetails.php?num='+num+'&regflg='+regflg+'&examcod='+examcod, true);
+		XmlReg.send(null);	
+		
+		
+	}
+	function valid(object)
+{
+	if (object.optcname1.value==0) 
+		{	
+		alert("You must select your programme.");
+		object.optcname1.focus();
+		return false;
+		}
+	if (object.sem.value==0) 
+		{	
+		alert("You must select your semester.");
+		object.sem.focus();
+		return false;
+		}
+	if (object.month.value==0) 
+		{	
+		alert("You must select exam month");
+		object.month.focus();
+		return false;
+		}
+	if (object.yr.value==0) 
+		{	
+		alert("You must select year of exam");
+		object.yr.focus();
+		return false;
+		}		
+}
+function formval(cospcod,colcod,hall)
+{
+	//alert(cospcod);
+	XmlReg = JSfncGetXMLHttpRequest();
+	var hall="1";
+	//alert(XmlReg);
+	if(!XmlReg){
+			alert('Ajax Not Supported');
+			//alert("2");
+			return;
+		}
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				//alert("200");
+				document.getElementById('schemedisplay').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("else");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='none';				
+		}
+		};				
+		XmlReg.open('GET', 'getAjaxdetails.php?hall='+hall+'&co='+cospcod+'&colco='+colcod, true);
+		
+		XmlReg.send(null);	
+}
+
+
+
+function Jsnfncgetsem(scheme,cospcod,schmflag)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+	//alert(scheme);
+	if(!XmlReg){
+			alert('Ajax Not Supported');
+			//alert("2");
+			return;
+		}
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				//alert("200");
+				document.getElementById('semdisplay').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("else");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='none';				
+		}
+		};				
+		XmlReg.open('GET', 'getAjaxdetails.php?schmflag='+schmflag+'&cosp='+cospcod+'&scheme='+scheme, true);
+		
+		XmlReg.send(null);
+}
+
+function JsnfncgetMonthYear(sem,cospcod,scheme,flg_s)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+	//alert(scheme);
+	if(!XmlReg){
+			alert('Ajax Not Supported');
+			//alert("2");
+			return;
+		}
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				//alert("200");
+				document.getElementById('showmonth').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("else");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='none';				
+		}
+		};				
+		XmlReg.open('GET', 'getAjaxdetails.php?myearflag='+flg_s+'&cospcod='+cospcod+'&scheme='+scheme+'&sem='+sem, true);
+		
+		XmlReg.send(null);
+}
+
+function JsnfncgetYear(month,cospcod,scheme,sem,monthflg)
+{
+	//alert(month);
+	
+	XmlReg = JSfncGetXMLHttpRequest();
+	//alert(scheme);
+	if(!XmlReg){
+			alert('Ajax Not Supported');
+			//alert("2");
+			return;
+		}
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				//alert("200");
+				document.getElementById('showyear').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("else");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='none';				
+		}
+		};				
+		XmlReg.open('GET', 'getAjaxdetails.php?monthflg='+monthflg+'&cospcod='+cospcod+'&scheme='+scheme+'&sem='+sem+'&month='+month, true);
+		
+		XmlReg.send(null);
+
+}
+
+function JSFnfeeconcession(feecon)
+{
+	//alert(feecon);
+	var flgfee=1;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		//alert('hi from js page11');
+		XmlReg.onreadystatechange = JSfncMyStateChangedForFeeconcession;		
+		//XmlReg.open('GET', 'getAjaxdetails.php?feecon='+feecon+'&flgfee='+flgfee, true);
+		XmlReg.open('GET', 'getAjaxdetails.php?flgfee='+flgfee+'&feecon='+feecon, true);
+		XmlReg.send(null);	
+}
+	function JSfncMyStateChangedForFeeconcession(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divfeecon').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+}
+function JSFnsetCommunity(community)
+{
+	//alert(community);
+	var flgcom=1;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		//alert('hi from js page11');
+		XmlReg.onreadystatechange = JSfncMyStateChangedForCommunity;		
+		
+		XmlReg.open('GET', 'getAjaxdetails.php?flgcom='+flgcom+'&community='+community, true);
+		XmlReg.send(null);	
+}
+	function JSfncMyStateChangedForCommunity(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				//alert("HELL");
+				document.getElementById('divShowComm').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("HELLe	");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	
+}
+function setuserlevel(usertype)
+{
+	//alert(usertype);
+	var userflag=1;
+	
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForUserType;		
+		
+		XmlReg.open('GET', 'getAjaxdetails.php?usertype='+usertype+'&userflag='+userflag, true);
+		//alert('hi from js page11');
+		XmlReg.send(null);	
+}
+	function JSfncMyStateChangedForUserType(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				//alert("HELL");
+				document.getElementById('divuserclass').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("HELLe	");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	
+}
+
+ function showspecialization(coursecod,course)
+ {
+	 //alert(course);
+	 var specialization=1;
+	
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForSpecialization;		
+		
+		XmlReg.open('GET', 'getAjaxdetails.php?coursecod='+coursecod+'&specialization='+specialization+'&course='+course, true);
+		//alert('hi from js page11');
+		XmlReg.send(null);	
+}
+	function JSfncMyStateChangedForSpecialization(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				var spec="divspecialization";
+				//var st=i;
+				//var sp=spec+stri;
+				//alert(spec);
+				document.getElementById('divspecialization').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("HELLe	");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	
+ }
+ function showExamfees(cospcod)
+{
+	//alert(cospcod);
+	 var examfee=1;
+	
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForSpecialization;		
+		
+		XmlReg.open('GET', 'getAjaxdetails.php?cospcodofcourse='+cospcod+'&examfee='+examfee, true);
+		//alert('hi from js page11');
+		XmlReg.send(null);	
+}
+	function JSfncMyStateChangedForSpecialization(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				var spec="divspecialization";
+				//var st=i;
+				//var sp=spec+stri;
+				//alert(spec);
+				document.getElementById('divspecialization').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("HELLe	");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+}
+
+ 
+ function showcaste(relcode)
+ {
+	// alert(relcode);
+	 var relflag=1;
+	
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForCasteRel;		
+		
+		XmlReg.open('GET', 'getAjaxdetail.php?relcode='+relcode+'&relflag='+relflag, true);
+		//alert('hi from js page11');
+		XmlReg.send(null);	
+}
+	function JSfncMyStateChangedForCasteRel(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				var spec="divspecialization";
+				//var st=i;
+				//var sp=spec+stri;
+				//alert(spec);
+				document.getElementById('divcaste').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("HELLe	");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	
+ }
+ 
+ function deletestaff(id,cospcod)
+ {
+	// alert(id);
+	var val=confirm("Do you want to delete");
+	if(val)
+	{
+		
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForDeleteStaff;		
+		
+		XmlReg.open('GET', 'getAjaxdetails.php?staffid='+id+'&cospcod='+cospcod+'&del='+1, true);
+		//alert('hi from js page11');
+		XmlReg.send(null);	
+}
+ }
+	function JSfncMyStateChangedForDeleteStaff(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				//var spec="divspecialization";
+				//var st=i;
+				//var sp=spec+stri;
+				//alert(spec);
+				document.getElementById('staffd').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("HELLe	");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	
+ }
+ function editfunction(id,cospcod)
+ {
+	// alert(id);
+	 XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		
+		XmlReg.onreadystatechange = JSfncMyStateForEditStaff;		
+		
+		XmlReg.open('GET', 'getAjaxdetails.php?staffid='+id+'&edit='+1, true);
+		//alert('hi from js page11');
+		XmlReg.send(null);	
+}
+function JSfncMyStateForEditStaff(){		
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				//var spec="divspecialization";
+				//var st=i;
+				//var sp=spec+stri;
+				//alert(spec);
+				document.getElementById('staffdiv').style.visiblibility='hidden';
+				document.getElementById('staffd').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			//alert("HELLe	");
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+	
+ }
+ 
+ function viewfunction(id,cospcod){		
+// alert(id);
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForViewStaff;
+		//alert(id);
+		XmlReg.open('GET', 'getAjaxdetails.php?staffid='+id+'&views='+1, true);
+		XmlReg.send(null);		
+	}
+
+function JSfncMyStateChangedForViewStaff(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('staffd').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+	}
+function showprevileges(privilege)
+{
+	//alert(privilege);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForPrivilege;
+		//alert(id);
+		XmlReg.open('GET', 'getAjaxdetails.php?privilege='+privilege, true);
+		XmlReg.send(null);		
+	}
+
+function JSfncMyStateChangedForPrivilege(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divcourse').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+}
+
+
+function fncgetSubject(examcod)
+{
+	if((examcod.length)!=8)
+	{
+		alert("Invalid Examcod");
+		document.getElementById('txtgetExamcod').select();
+		return false;
+	}
+	else if((examcod.length)==8)
+	{
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForSubject;
+		//alert(id);
+		XmlReg.open('GET', 'getAjaxdetails.php?examcod='+examcod+'&subjectflag='+1, true);
+		XmlReg.send(null);	
+	}
+}
+
+function JSfncMyStateChangedForSubject(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('divsubject').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+}
+
+function getstuddet(year)
+{
+	
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForStudentDetails;
+		//alert(year);
+		XmlReg.open('GET', 'getAjaxdetails.php?Yearofadmin='+year+'&yearflg='+1, true);
+		XmlReg.send(null);		
+	}
+
+function JSfncMyStateChangedForStudentDetails(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('showdet').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+}
+
+function fncdisplaydet(name,course,college,yrofadmn)
+{
+	//alert(name +course);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForStudentDetailsbyName;
+		//alert(name);
+		XmlReg.open('GET', 'getAjaxdetails.php?yrofadmn='+yrofadmn+'&name='+name+'&college='+college+'&course='+course+'&detbynameflg='+1, true);
+		XmlReg.send(null);		
+	}
+
+function JSfncMyStateChangedForStudentDetailsbyName(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('showdetail').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+}
+
+
+function addtolist(cb){
+			var select_list_selected_index = cb.selectedIndex;
+			var text = cb.options[select_list_selected_index].value;
+			var flg=1;
+			var value = cb.value;
+			var myList = document.getElementById("lst");
+			//if(text==0)
+			if(myList.options[0].value==0)
+			myList.options[0]=null;
+			//alert("MM"+myList.length+" " +text);
+			if(cb.options[select_list_selected_index].value!=0)
+			{
+				for ( var x=0; x<myList.length; x++ ) 
+				{
+				if(value==myList.options[x].value)
+				{
+					flg=0;
+					break;
+				}
+				}
+				if(flg==1)
+				{
+				myList.size = myList.size + 1;
+				myList.options[myList.length] = new Option(text, value);
+				}
+				if ( myList.options.length>0 ) {
+				var colcod="";
+				for ( var x=0; x<myList.length; x++ ) {
+				if(colcod!='')
+				colcod=colcod+','+myList.options[x].value;
+				else
+				colcod=colcod+myList.options[x].value;
+				//alert("LL"+colcod);
+			}
+			}
+			}
+			//alert("LL"+colcod);
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForUniUserregistration;
+		//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?listcol='+1+'&collcod='+colcod, true);
+		XmlReg.send(null);	
+		
+		}
+
+
+
+function JSfncMyStateChangedForUniUserregistration(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstcourse').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+}
+
+function addcrstolist(cb)
+{
+	var select_list_selected_index = cb.selectedIndex;
+			var text = cb.options[select_list_selected_index].value.substr(0,3)+'-'+ cb.options[select_list_selected_index].value.substr(3,3);
+			var value = cb.value;
+			var flg=1;
+			var myList = document.getElementById("crslst");
+			for ( var x=0; x<myList.length; x++ ) 
+			{
+				//myList.options[x].text.select();
+				if(myList.options[x].value==value)
+				{
+					flg=0;
+					break;
+				}
+			}
+			if(myList.options[0].value==0)
+			myList.options[0]=null;
+			if(flg==1)
+			{
+			myList.size = myList.size + 1;
+			myList.options[myList.length] = new Option(text, value);
+			}
+}
+
+
+function clearfield(cb)
+{
+            var select_list_selected_index = cb.selectedIndex;
+			cb.options[select_list_selected_index]=null;
+			if ( cb.options.length==0 )
+			{
+				cb.options[0] = new Option('--Colcod--', 0);
+				cb.size=1;
+			}
+			//var text = cb.options[select_list_selected_index].value.substr(0,3)+'-'+ cb.options[select_list_selected_index].value.substr(3,3);
+			//var value = cb.value;
+			
+}
+
+function clearcoursefield(cb)
+{
+            var select_list_selected_index = cb.selectedIndex;
+			cb.options[select_list_selected_index]=null;
+			if ( cb.options.length==0 )
+			{
+				cb.options[0] = new Option('--Colcod - Coursecod--', 0);
+				cb.size=1;
+			}
+			//var text = cb.options[select_list_selected_index].value.substr(0,3)+'-'+ cb.options[select_list_selected_index].value.substr(3,3);
+			//var value = cb.value;
+			
+}
+
+function getcourse(colcod)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForAdminregistration;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?collegecod='+colcod, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedForAdminregistration(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstcourse').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function listspecialization(course)
+{//alert(course);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedlistspecialization;
+	//alert(course);
+		XmlReg.open('GET', 'getAjaxdetails.php?Selcoursecode='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedlistspecialization(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('specialization').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function hidecourses(colcod,divno,ccode){
+		
+	document.getElementById('div'+divno).style.display='none'
+	}
+	
+	 function showcourses(colcod,divno,ccode){	
+	
+		  
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}	
+	 
+	 
+		XmlReg.onreadystatechange = function(){
+	 
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+				document.getElementById('div'+divno).innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		 
+	 
+		XmlReg.open('GET', 'getAjaxdetails.php?cl='+colcod+'&ccode='+ccode, true);
+		XmlReg.send(null);		
+		 
+		 
+			
+		 
+	}
+	
+	
+	 function showcolleges(cospcod,divno,ccode)
+	 {	
+	 
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}	
+	 
+	 
+		XmlReg.onreadystatechange = function(){
+	 
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+				  
+				document.getElementById('div'+divno).innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		 
+	 
+		XmlReg.open('GET', 'getAjaxdetails.php?cospcod='+cospcod+'&ccode='+ccode, true);
+		XmlReg.send(null);		
+		 
+		 
+			
+		 
+	}
+
+ function getcospwrtcourse(coursecod)
+	 {	
+//alert(coursecod);
+	 f=1;
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}	
+	 
+	 
+		XmlReg.onreadystatechange = function(){
+	 
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+				  
+				document.getElementById('lstcourse').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		 
+	 
+		XmlReg.open('GET', 'getAjaxdetails.php?coursecod1='+coursecod+'&f='+f, true);
+		XmlReg.send(null);		
+		 
+		 
+			
+		 
+	}
+
+/*
+function getcospwrtcourse(coursecod)
+{
+//
+alert(coursecod);
+	  // var f=document.getElementById('txtflag').value;
+	XmlReg = JSfncGetXMLHttpRequest();
+
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}	
+	
+		XmlReg.onreadystatechange = JSfncMyStateChangedForgetcospwrtcourse2;
+	alert(coursecod);
+		XmlReg.open('GET', 'getAjaxdetails.php?coursecod1='+coursecod+'&f='+f, true);
+		XmlReg.send(null);	
+}
+*/
+	
+function PopulateYrofadmin(yrcosp,yrcolco)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divyr').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getAjaxdetails.php?yrcolcod='+yrcolco+'&yrcospcod='+yrcosp, true);
+		XmlReg.send(null);
+}
+
+ function JsnfncgetSubject(sem,cospcod,scheme,flg)
+{
+
+XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('dispsubj').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getAjaxdetails.php?cospcodsubj='+cospcod+'&subjcod='+1+'&sems='+sem+'&schemes='+scheme, true);
+		XmlReg.send(null);
+
+
+}
+ 
+ function displaysem(cospcod)
+{
+	//alert(cospcod);
+XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('semdisplay').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};//alert(cospcod);
+		XmlReg.open('GET',  'getAjaxdetails.php?cospcodee='+cospcod, true);
+		XmlReg.send(null);
+
+
+}
+
+
+
+function showgroupwisedata(coursegroup)
+	{
+		//alert(coursegroup);
+		
+		var year=document.getElementById('year').value;	
+		//alert(year);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('show').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?groupyr='+year+'&group='+coursegroup, true);
+		XmlReg.send(null);	
+	}
+	
+function showyearwise(val,flg)
+	{
+	//alert(val);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('show').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?yr='+val+'&flag='+flg, true);
+		XmlReg.send(null);
+	}	//eof
+	
+function showyearandcoursegroupwise(year,coursegroup,flg)
+	{
+		//alert(flg);
+		//alert(year);
+		//alert(coursegroup);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('show').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?aaayr='+year+'&aaagroup='+coursegroup+'&aaflg='+flg, true);
+		XmlReg.send(null);	
+		
+	}//eof 
+function getcollegewrtcourse(coursecod)
+{
+	 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForgetcollegewrtcourse;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?coursecod2='+coursecod, true);
+		XmlReg.send(null);		
+}
+
+/*function getcollegewrtcosp(cospcod)
+{
+	 
+	 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedForgetcollegewrtcosp;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?coursecod3='+cospcod, true);
+		XmlReg.send(null);		
+}
+*/
+
+function getcollegewrtcosp(cospcod)
+	{
+		//alert(flg);
+		//alert(year);
+		//alert(coursegroup);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstcollege').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?coursecod3='+cospcod, true);
+		XmlReg.send(null);	
+		
+	}//eof 
+
+function JSfncMyStateChangedForgetcospwrtcourse(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstcourse').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+///----------------FTRP
+function selectsubject(val,dat)
+ {
+	 
+	  
+	//var a=document.getElementById("common").value;
+	
+	 if(document.getElementById("common").checked==true)
+	 { 
+		var common=1;
+		document.getElementById("common").value=1; 
+		 document.getElementById('special').disabled = true;
+	 }else if(document.getElementById("common").checked==false)
+	 {
+		var common=0;
+		document.getElementById("common").value=0; 
+		document.getElementById('special').disabled = false;	
+	 }
+ 	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('show').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?examcodforselsubj='+val+'&common='+common+'&dat='+dat, true);
+		XmlReg.send(null);
+ }//eof
+
+
+function showcountForStudent(val,cmmn)
+{
+	//alert(cmmn);
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('shwtotcnt').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?allthecount='+val+'&commnflg='+cmmn, true);
+		XmlReg.send(null); 
+}
+
+function subwithspecial(flg)
+{
+	var exam=document.getElementById("course").value;
+	var cospcod=document.getElementById("special").value;
+	 var val=1;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('show').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?subjectwithspecial='+exam+'&spcos='+cospcod+'&subject_flag='+flg, true);
+		XmlReg.send(null);
+}
+
+function showcollege(val)
+ {
+	 //alert("ggg");
+	 var course=document.getElementById('course').value;
+	// var spec=document.getElementById('special').value;
+	// var spec=document.getElementById("special").value;
+	 //alert("dd");
+	 //alert(spec);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('colshow').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?bcourse='+course+'&bsub='+val, true);
+		XmlReg.send(null); 
+	 
+ }//eof
+
+function displaycandpresentdetails(val)
+{
+	//alert("kk");
+	var exam=document.getElementById("course").value;
+	var common=document.getElementById("common").value;
+	var cospcod=document.getElementById("special").value; 
+	//alert(cospcod);
+	var subj=document.getElementById("subject").value; 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('presentshow').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?presentdetails='+val+'&preexam='+exam+'&precommon='+common+'&prespecial='+cospcod+'&presub='+subj, true);
+		XmlReg.send(null);	
+}//eof
+function selectspecial(val,flg)
+ {
+	 
+	// alert(flg);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('branch').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?aabranch='+val+'&stflag='+flg, true);
+		XmlReg.send(null);
+ }//eof
+ 
+ 
+ function showstudcount(val,cmmn_flag)
+ {
+	//alert("ff"+val+' '+cmmn_flag);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('cnt').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?subact='+val+'&common_flag='+cmmn_flag, true);
+		XmlReg.send(null);	
+ }//eof
+ 
+ function showbundles()
+{
+	var val=document.getElementById("noofbundle").value;
+	if(val=="")
+	{
+	var no=0;
+	alert("Enter no of bundles");
+	}
+	else
+	{
+	var no=1;
+	}
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('showbundle').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		XmlReg.open('GET', 'getAjaxdetails.php?bundleno='+val+'&no='+no, true);
+		XmlReg.send(null); 	
+}
+
+
+function getsemwrtcourse(course)
+{
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetsemwrtcourse;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?coursegroup='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetsemwrtcourse(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstsem').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+function getsemwrtcourse4reg(course)
+{
+  //alert (course);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetsemwrtcourse4reg;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?coursegroup4reg='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetsemwrtcourse4reg(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstsem').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function getmonthyrwrtcourse(sem,course)
+{
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetmonthyrwrtcourse;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?semca='+sem+'&coursegroup='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetmonthyrwrtcourse(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstmonthyr').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function getmonthyrwrtcourse4reg(sem,course)
+{
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetmonthyrwrtcourse4reg;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?semreg='+sem+'&coursegroup4reg='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetmonthyrwrtcourse4reg(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstmonthyr').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+	function getcoldetwrtcourse(monthyr,course,sem)
+{
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetcoldetwrtcourse;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?camyr='+monthyr+'&semca='+sem+'&coursegroup='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetcoldetwrtcourse(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstcollege').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+
+function getcoldetwrtcourse4reg(monthyr,course,sem)
+{
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetcoldetwrtcourse4reg;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?regmyr='+monthyr+'&semreg='+sem+'&coursegroup4reg='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetcoldetwrtcourse4reg(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstcollege').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+
+function getspecdetwrtcol4reg(colcod,monthyr,course,sem)
+{
+// alert(colcod);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetspecdetwrtcol4reg;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?colreg='+colcod+'&regmyr='+monthyr+'&semreg='+sem+'&coursegroup4reg='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetspecdetwrtcol4reg(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstspec').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function getspecdetwrtcol(colcod,monthyr,course,sem)
+{
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetspecdetwrtcol;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?colca='+colcod+'&camyr='+monthyr+'&semca='+sem+'&coursegroup='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetspecdetwrtcol(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstspec').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function displayCoursesofCollege(colcod)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divCourse').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getAjaxdetails.php?indxcolcod='+colcod, true);
+		XmlReg.send(null);
+}
+
+
+
+
+
+function PopulateSchemeForIndexcard(val,val2)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divscheme').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getAjaxdetails.php?indexcourse='+val+'&indexval='+val2, true);
+		XmlReg.send(null);
+
+}
+
+function populateSem(val,val2)
+{
+	var course=document.getElementById('selcourse').value;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divsem').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getAjaxdetails.php?indexscheme='+val+'&indexcoursecod='+course+'&indexval='+val2, true);
+		XmlReg.send(null);
+
+}
+
+
+function populateSubjectForIndexcard(val,schm,course,val2)
+{
+	if(val2=1)
+	var course=document.getElementById('selcourse').value;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divcommonsubj').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getAjaxdetails.php?indxscheme='+schm+'&indxcourse='+course+'&indxsem='+val+'&indexval='+val2, true);
+		XmlReg.send(null);
+
+}//EOF
+
+function Age()
+{
+ 
+ 
+ var dob = document.getElementById('date1').value;
+//var dob = document.getElementById('year').value+"/"+document.getElementById('month').value+"/"+document.getElementById('day').value;
+//alert( dob );
+	dob =dob.split('/')
+var curdt=document.getElementById('txtcurdt').value;
+	curdt=curdt.split('/');
+ if (dob.length === 3) {
+            
+var bday=parseInt(dob[0]);
+var bmo=(parseInt(dob[1])-1);
+var byr=parseInt(dob[2]);
+var byr;
+var age;
+ 
+tday=parseInt(curdt[0]);
+tmo=parseInt(curdt[1]);
+tyr=parseInt(curdt[2]);;
+{
+if((tmo > bmo)||(tmo==bmo & tday>=bday))
+{age=byr}
+else
+{age=byr+1}
+ document.getElementById('txtage').value =tyr-age ;
+}}
+ 
+ 
+}
+
+
+function fncgetAllCourses4college(colcod)
+	{
+
+		//alert(document.getElementById('divShowCaste'+i));
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		XmlReg.onreadystatechange = JSfncgetAllCourses4college;
+		XmlReg.open('GET', 'getAjaxdetails.php?regcolcod='+colcod, true);
+		XmlReg.send(null);
+	}
+
+function JSfncgetAllCourses4college(){
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				var ele="lstcourse";
+				document.getElementById(ele).innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+}
+
+
+
+
+ function showtable(no)
+{
+
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+		XmlReg.onreadystatechange = JSfncMyStateChangedshowtable;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?no='+no, true);
+		XmlReg.send(null);
+}
+
+
+function JSfncMyStateChangedshowtable(){
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('content').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+
+}
+
+function popup(op)
+{ 
+  	var examcode=document.getElementById("examcode").value;
+	var receiptno=document.getElementById("receiptno").value;
+	var receiptnoold=document.getElementById("receiptnoold").value;
+	 
+	 var applnno=document.getElementById("applnno").value;	 
+	
+	var receiptdate=document.getElementById("receiptdate").value;
+	var receiptamt=document.getElementById("receiptamt").value;
+	var totalfee=document.getElementById("totalfee").value;
+	var feepaid=document.getElementById("feepaid").value;
+      var candcode=document.getElementById("candcode").value;
+	var mode=document.getElementById("selmode").value;
+      var cospcod=document.getElementById("course").value;
+      var bank=document.getElementById("bank").value;
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('content').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET', 'getAjaxdetails.php?bank_code='+bank +'&ex_code='+examcode+'&receiptno='+receiptno+'&receiptdate='+receiptdate+'&receiptamt='+receiptamt+'&totalfee='+totalfee+'&feepaid='+feepaid+'&candcode='+candcode+'&mode='+mode+'&cospcod='+cospcod+'&operation='+op+'&rold='+receiptnoold+'&applnNo='+applnno, true);
+		XmlReg.send(null);
+}//eof
+function deletereceipt(examcode,receiptno)
+{
+     var out= confirm("Are you sure you want to delete?");document.getElementById("SAD");
+if(out==true) 
+   {
+  	var candcode=document.getElementById("candcode").value;
+	var mode=document.getElementById("selmode").value;
+	var cospcod=document.getElementById("course").value;
+	
+  var applnno=document.getElementById("applnno").value;
+    
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('content').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET', 'getAjaxdetails.php?ex_code='+examcode+'&receiptno='+receiptno+'&candcode='+candcode+'&mode='+mode+'&cospcod='+cospcod+'&operation=delete', true);
+		XmlReg.send(null);
+  
+  }
+}//eof
+
+
+
+function deletereceipt(examcode,receiptno,applno)
+{
+     var out= confirm("Are you sure you want to delete?");
+if(out==true) 
+   {
+  	var candcode=document.getElementById("candcode").value;
+	var mode=document.getElementById("selmode").value;
+	var cospcod=document.getElementById("course").value;
+    
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('content').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET', 'getAjaxdetails.php?ex_code='+examcode+'&receiptno='+receiptno+'&candcode='+candcode+'&mode='+mode+'&cospcod='+cospcod+'&applnNo='+applno+'&operation=delete', true);
+		XmlReg.send(null);
+  
+  }
+}//eof
+
+function getsemwrtcrse4cancel(cospcod)
+{
+
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+		XmlReg.onreadystatechange = JSfncMyStateChangedForcancel;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?cospcancel='+cospcod, true);
+		XmlReg.send(null);
+}
+
+
+function JSfncMyStateChangedForcancel(){
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstsem').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+
+}
+
+function getexammonthyr(sem)
+{
+
+	//alert( course);
+
+	cospcod=document.getElementById('selcourse').value ;
+
+
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+		XmlReg.onreadystatechange = JSfncMyStateChangedForMonthyr;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?cancelsem='+sem+'&cosp='+cospcod, true);
+		XmlReg.send(null);
+}
+
+
+function JSfncMyStateChangedForMonthyr(){
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstmnthyr').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+
+}
+
+function getregdates(course,sem,mnthyr)
+{
+	type=0;
+	 
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetregdates;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?datesreg=1&semreg='+sem+'&coursegroup4reg='+course+'&mnyr4reg='+mnthyr+'&type='+type, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetregdates(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('disparea').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function getSpecwrtcourse4reg(spec,course,sem,mnthyr)
+{
+  
+    course=document.getElementById("selcourse").value
+    sem=document.getElementById("selsem").value;
+    mnthyr=document.getElementById("selmonthyr").value;
+	type=0;
+	   
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetSpecwrtcourse4reg;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?datesreg=1&spec4reg='+spec+'&semreg='+sem+'&coursegroup4reg='+course+'&mnyr4reg='+mnthyr+'&type='+type, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetSpecwrtcourse4reg(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('disparea').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+ 
+
+function getregdates(course,sem,mnthyr)
+{
+	type=0;
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetregdates;
+	//alert(colcod);
+XmlReg.open('GET', 'getAjaxdetails.php?datesreg=1&semreg='+sem+'&coursegroup4reg='+course+'&mnyr4reg='+mnthyr+'&type='+type, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetregdates(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('disparea').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function getsemwrtcourse4hallup(course)
+{
+ halltype=document.getElementById('halltype').value;
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetsemwrtcourse4hallup;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?coursegroup4hallup='+course+'&halltype='+ halltype, true);
+		 
+		XmlReg.send(null);
+}
+
+
+function JSfncMyStateChangedgetsemwrtcourse4hallup(){
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstsem').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+
+}
+
+
+
+function getsemwrtcourse4hall(course)
+{
+  
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetsemwrtcourse4hall;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?coursegroup4hall='+course, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetsemwrtcourse4hall(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstsem').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+function getmonthyrwrtcourse4hall(sem,course)
+{
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetmonthyrwrtcourse4hall;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?semhallex='+sem+'&coursegroup4hall='+course, true);
+		XmlReg.send(null);		
+}
+
+
+
+
+
+function JSfncMyStateChangedgetmonthyrwrtcourse4hall(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('lstmonthyr').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+function getHalldates(course,sem,mnthyr)
+{
+	 
+	type=document.getElementById("selexamtype").value;
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetHalldates;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?dateshall=1&semhall='+sem+'&coursegroup4hall='+course+'&mnyr4hall='+mnthyr+'&type='+type, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetHalldates(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('disparea').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+
+function getSchwrtcourse4reg(sch)
+{
+	 
+  
+    course=document.getElementById("selcourse").value
+    sem=document.getElementById("selsem").value;
+    mnthyr=document.getElementById("selmonthyr").value;
+	type=0;
+	   
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetSchwrtcourse4reg;
+	//alert(colcod);
+XmlReg.open('GET', 'getAjaxdetails.php?datesreg=1&sreg='+sch+'&semreg='+sem+'&coursegroup4reg='+course+'&mnyr4reg='+mnthyr+'&type='+type, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetSchwrtcourse4reg(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('disparea').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+
+function getCAdates(course,sem,mnthyr)
+{
+	 
+	type=document.getElementById("selexamtype").value;
+ 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = JSfncMyStateChangedgetHalldates;
+	//alert(colcod);
+		XmlReg.open('GET', 'getAjaxdetails.php?datesca=1&semhall='+sem+'&coursegroup4hall='+course+'&mnyr4hall='+mnthyr+'&type='+type, true);
+		XmlReg.send(null);		
+}
+
+
+function JSfncMyStateChangedgetHalldates(){			
+	if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('disparea').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		
+}
+
+function  displayschemeFromOt_exam(courseid)
+{
+	//alert(courseid);
+XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('lstscheme').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};//alert(cospcod);
+		XmlReg.open('GET',  'getAjaxdetails.php?courseidVal='+courseid, true);
+		XmlReg.send(null);
+
+
+}
+
+function  displaysemFromOt_exam(scheme,courseid)
+{
+	//alert(courseid);
+var course=document.getElementById(courseid).value; //alert(course);
+XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('lstsem').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};//alert(cospcod);
+		XmlReg.open('GET',  'getAjaxdetails.php?schemeval='+scheme+'&courseidval='+course, true);
+		XmlReg.send(null);
+
+
+}
+function  displaymonthyearFromOt_exam(sem,scheme,courseid)
+{
+	//alert(courseid);
+var course=document.getElementById(courseid).value; //alert(course);
+var scheme=document.getElementById(scheme).value; //alert(scheme);
+XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('lstmonthyr').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};//alert(cospcod);
+		XmlReg.open('GET',  'getAjaxdetails.php?schemeValue='+scheme+'&semVal='+sem+'&courseVal='+course, true);
+		XmlReg.send(null);
+
+
+}
+
+

@@ -1,0 +1,1863 @@
+/* This script and many more are available free online at
+The JavaScript Source!! http://javascript.internet.com
+Created by: Jim Stiles | www.jdstiles.com */
+
+function validateFormStudent(object)
+{	
+	 //alert("Hello");
+	object.txthname1.value=object.txthname1_h.value;  	
+	object.txtstreet1.value=object.txtstreet1_h.value;
+	object.txtplace1.value=object.txtplace1_h.value;
+	object.txtpostoffice1.value=object.txtpostoffice1_h.value;
+	object.txtpincode1.value=object.txtpincode1_h.value;
+	object.cbodistrict1.value=object.cbodistrict1_h.value;
+	object.txtphcode1.value=object.txtphcode1_h.value;
+	object.txtphno1.value=object.txtphno1_h.value;	
+	//alert("HH"+((object.txtname.value).length));
+
+
+ 
+
+
+if((object.cbocomm.value==18)||(object.cbocomm.value==19))
+	{
+		if(object.cbocomm.value==18)
+		var val="General ";
+		else if(object.cbocomm.value==19)
+		var val="OBC Creamy Layer "
+		if(object.cbocommunity.value=='Y')
+		{
+			alert(val+' candidate cannot have fee concession');
+			object.cbocommunity.focus();
+			return false;
+		}
+	}
+
+	if (trim(object.txtname.value).length==0) 
+	{	
+		alert("Please enter name!");
+		object.txtname.focus();
+		return false;
+	}else if(isSpclFirstChar(trim(object.txtname.value)))
+	{			
+	    alert('Invalid Name.');
+		object.txtname.focus();
+		object.txtname.select();
+		return false;
+	}else if(isSpclCharName(trim(object.txtname.value)))
+	{		
+		alert('Invalid Name.');
+		object.txtname.focus();
+		object.txtname.select();
+		return false;
+	}
+	else if(trim(object.txtname.value).length < 3)
+	{
+		alert("Invalid Name!");
+		object.txtname.focus();
+		object.txtname.select();
+		return false;
+	}
+	else if(checkAllSameChar(trim(object.txtname.value)))
+	{
+		alert("Invalid Name!");
+		object.txtname.focus();
+		object.txtname.select(); 
+		return false;
+	}
+	if (object.cboday.value==0) 
+	{	
+		alert("Please select day for date of birth!");
+		object.cboday.focus();
+		return false;
+	}
+	if (object.cbomonth.value==0) 
+	{	
+		alert("Please select month for date of birth!");
+		object.cbomonth.focus();
+		return false;
+	}
+	if (object.cboyear.value==0) 
+	{	
+		alert("Please select year for date of birth!");
+		object.cboyear.focus();
+		return false;
+	}
+		if (object.cbogender.value==0) 
+	{	
+		alert("Please select gender!");
+		object.cbogender.focus();
+		return false;
+	}
+		if (object.cboreligion.value==0) 
+	{	
+		alert("Please select Religion!");
+		object.cboreligion.focus();
+		return false;
+	}
+	
+	/*	if (object.cbocaste.value==0) 
+	{	
+		alert("Please select Caste!");
+		object.cbocaste.focus();
+		return false;
+	}*/
+	
+	if (object.cbocomm.value==0) 
+	{	
+		alert("Please select community!");
+		object.cbocomm.focus();
+		return false;
+	}
+	
+	if (object.cbocommunity.value==0) 
+	{	
+		alert("Please select eligibility for fee concession!");
+		object.cbocommunity.focus();
+		return false;
+	}
+	if (object.cbonationality.value==0) 
+	{	
+		alert("Please select nationality!");
+		object.cbonationality.focus();
+		return false;
+	}	
+	if(object.chktick.checked==true)
+	{			//alert("FFF");
+		if(trim(object.txthname1.value).length==0)
+		{			
+			alert("Please enter house name!");	
+			object.chktick.focus();					
+			return false;
+		}else if(trim(object.txthname1.value)==0)
+		{			
+			alert("Invalid house name1!");
+			object.chktick.focus();
+			return false;
+		}else if(isSpclFirstChar(trim(object.txthname1.value)))
+		{	
+		    alert('Invalid House name.');
+			object.chktick.focus();
+			return false;
+		}else if(isSpclCharHouseName(trim(object.txthname1.value)))
+		{
+			alert('Invalid House name.');
+			object.chktick.focus();	
+			return false;
+		}else if(trim(object.txthname1.value).length < 3)
+		{
+			alert("Invalid House name12!");
+			object.chktick.focus();	
+			return false;
+		}
+		else if(checkRepeatChars(trim(object.txthname1.value),1))
+		{ 
+			alert("Invalid House name2!");
+			object.chktick.focus();
+			return false;
+		}else if(checkAllSameChar(trim(object.txthname1.value)))
+		{
+			alert("Invalid House name67`!");
+			object.chktick.focus();
+			return false;
+		}else if(fncCheckAllInteger(trim(object.txthname1.value)))
+		{			
+			alert("Invalid House name3!");
+			object.chktick.focus();
+			return false;
+		}
+	}else{		
+	//alert("FFF");
+		if (trim(object.txthname1_h.value).length==0) 
+		{	
+			alert("Please enter house name!");
+			object.txthname1_h.focus();
+			object.txthname1_h.select();
+			return false;
+		}else if(trim(object.txthname1_h.value)==0)
+		{			
+			alert("Invalid house name4!");
+			object.txthname1_h.focus();
+			object.txthname1_h.select();
+			return false;
+		}else if(isSpclFirstChar(trim(object.txthname1_h.value)))
+		{	
+		    alert('Invalid House name.');
+			object.txthname1_h.focus();
+			object.txthname1_h.select();
+			return false;
+		}else if(isSpclCharHouseName(trim(object.txthname1_h.value)))
+		{
+			alert('Invalid House name.');
+			object.txthname1_h.focus();
+			object.txthname1_h.select();
+			return false;
+		}else if(trim(object.txthname1_h.value).length < 3)
+		{
+			alert("Invalid House name5!");
+			object.txthname1_h.focus();
+			object.txthname1_h.select();
+			return false;
+		}else if(checkRepeatChars(trim(object.txthname1_h.value),1))
+		{ 
+			alert("Invalid House name6!");
+			object.txthname1_h.focus();
+			object.txthname1_h.select();
+			return false;
+		}else if(checkAllSameChar(trim(object.txthname1_h.value)))
+		{
+			alert("Invalid House name7!");
+			object.txthname1_h.focus();
+			object.txthname1_h.select();
+			return false;
+		}else if(fncCheckAllInteger(trim(object.txthname1_h.value)))
+		{			
+			alert("Invalid House name!8");
+			object.txthname1_h.focus();
+			object.txthname1_h.select();
+			return false;
+		}	
+	}
+	if(object.chktick.checked==true)
+	{	
+		if((trim(object.txtstreet1.value).length!=0))
+		{
+		if(trim(object.txtstreet1.value)==0)
+		{			
+			//alert("Invalid street!"+ object.txtstreet1.value);
+			object.chktick.focus();
+			return false;
+		}else if(isSpclFirstChar(trim(object.txtstreet1.value)))
+		{	
+		    alert('Invalid street!');
+			object.chktick.focus();
+			return false;
+		}else if(isSpclCharHouseName(trim(object.txtstreet1.value)))
+		{		
+			alert('Invalid street!');
+			object.chktick.focus();
+			return false;
+		}else if(trim(object.txtstreet1.value).length < 3)
+		{
+			alert("Invalid street!");
+			object.chktick.focus();
+			return false;
+		}else if(checkRepeatChars(trim(object.txtstreet1.value),1))
+		{ 
+			alert("Invalid street!");
+			object.chkbox.focus();
+			return false;
+		}else if(checkAllSameChar(trim(object.txtstreet1.value)))
+		{
+			alert("Invalid street!");
+			object.chktick.focus();
+			return false;
+		}else if(fncCheckAllInteger(trim(object.txtstreet1.value)))
+		{			
+			alert("Invalid street!");
+			object.chktick.focus();
+			return false;
+		}
+		}
+	}
+	else{	
+	//alert(trim(object.txtstreet1.value)+ "NAME");
+		 if((trim(object.txtstreet1_h.value)==0))
+		{			
+			alert("Invalid street!");
+			object.txtstreet1_h.focus();
+			object.txtstreet1_h.select();
+			return false;
+		}else if(isSpclFirstChar(trim(object.txtstreet1_h.value)))
+		{	
+		    alert('Invalid street!');
+			object.txtstreet1_h.focus();
+			object.txtstreet1_h.select();
+			return false;
+		}else if(isSpclCharHouseName(trim(object.txtstreet1_h.value)))
+		{		
+			alert('Invalid street!');
+			object.txtstreet1_h.focus();
+			object.txtstreet1_h.select();
+			return false;
+		}else if(trim(object.txtstreet1_h.value).length < 3)
+		{
+			alert("Invalid street!");
+			object.txtstreet1_h.focus();
+			object.txtstreet1_h.select();
+			return false;
+		}else if(checkRepeatChars(trim(object.txtstreet1_h.value),1))
+		{ 
+			alert("Invalid street!");
+			object.txtstreet1_h.focus();
+			object.txtstreet1_h.select();
+			return false;
+		}else if(checkAllSameChar(trim(object.txtstreet1_h.value)))
+		{
+			alert("Invalid street!");
+			object.txtstreet1_h.focus();
+			object.txtstreet1_h.select();
+			return false;
+		}else if(fncCheckAllInteger(trim(object.txtstreet1_h.value)))
+		{			
+			alert("Invalid street!");
+			object.txtstreet1_h.focus();
+			object.txtstreet1_h.select();
+			return false;
+		}			
+	}if(object.chktick.checked==true)
+	{	
+		if(trim(object.txtplace1.value).length==0)
+		{			
+			alert("Please enter place!");
+			object.chktick.focus();
+			return false;
+		}else if(trim(object.txtplace1.value)==0)
+		{			
+			alert("Invalid place!");
+			object.chktick.focus();
+			return false;
+		}else if(isSpclFirstChar(trim(object.txtplace1.value)))
+		{	
+		    alert('Invalid Place!');
+			object.chktick.focus();
+			return false;
+		}else if(isSpclChar(trim(object.txtplace1.value)))
+		{
+			alert('Invalid Place!');
+			object.chktick.focus();
+			return false;
+		}else if(trim(object.txtplace1.value).length < 3)
+		{
+			alert("Invalid Place!");
+			object.chktick.focus();
+			return false;
+		}else if(checkRepeatChars(trim(object.txtplace1.value),1))
+		{ 
+			alert("Invalid place!");
+			object.chktick.focus();
+			return false;
+		}else if(checkAllSameChar(trim(object.txtplace1.value)))
+		{
+			alert("Invalid place!");
+			object.chktick.focus();
+			return false;
+		}else if(fncCheckAllInteger(trim(object.txtplace1.value)))
+		{			
+			alert("Invalid place!");
+			object.chktick.focus();
+			return false;
+		}				
+	}
+	else{
+		if (trim(object.txtplace1_h.value).length==0)  
+		{
+			alert("Please enter place!");
+			object.txtplace1_h.focus();
+			object.txtplace1_h.select();
+			return false;
+		}else if(trim(object.txtplace1_h.value)==0)
+		{			
+			alert("Invalid place!");
+			object.txtplace1_h.focus();
+			object.txtplace1_h.select();
+			return false;
+		}else if(isSpclFirstChar(trim(object.txtplace1_h.value)))
+		{	
+		    alert('Invalid place.');
+			object.txtplace1_h.focus();
+			object.txtplace1_h.select();
+			return false;
+		}else if(isSpclChar(trim(object.txtplace1_h.value)))
+		{
+			alert('Invalid place.');
+			object.txtplace1_h.focus();
+			object.txtplace1_h.select();
+			return false;
+		}else if(trim(object.txtplace1_h.value).length < 3)
+		{
+			alert("Invalid place!");
+			object.txtplace1_h.focus();
+			object.txtplace1_h.select();
+			return false;
+		}else if(checkRepeatChars(trim(object.txtplace1_h.value),1))
+		{ 
+			alert("Invalid place!");
+			object.txtplace1_h.focus();
+			object.txtplace1_h.select();
+			return false;
+		}else if(checkAllSameChar(trim(object.txtplace1_h.value)))
+		{
+			alert("Invalid place!");
+			object.txtplace1_h.focus();
+			object.txtplace1_h.select();
+			return false;
+		}else if(fncCheckAllInteger(trim(object.txtplace1_h.value)))
+		{			
+			alert("Invalid place!");
+			object.txtplace1_h.focus();
+			object.txtplace1_h.select();
+			return false;
+		}	
+	}if(object.chktick.checked==true)
+	{	
+		if(trim(object.txtpostoffice1.value).length==0)
+		{			
+			alert("Please enter post!");
+			object.chktick.focus();
+			return false;
+		}else if(trim(object.txtpostoffice1.value)==0)
+		{			
+			alert("Invalid post!");
+			object.chktick.focus();
+			return false;
+		}else if(isSpclFirstChar(trim(object.txtpostoffice1.value)))
+		{	
+		    alert('Invalid post!');
+			object.chktick.focus();
+			return false;
+		}else if(isSpclChar(trim(object.txtpostoffice1.value)))
+		{
+			alert('Invalid post!');
+			object.chktick.focus();
+			return false;
+		}else if(trim(object.txtpostoffice1.value).length < 3)
+		{
+			alert("Invalid post!");
+			object.chktick.focus();
+			return false;
+		}else if(checkRepeatChars(trim(object.txtpostoffice1.value),1))
+		{ 
+			alert("Invalid post!");
+			object.chktick.focus();
+			return false;
+		}else if(checkAllSameChar(trim(object.txtpostoffice1.value)))
+		{
+			alert("Invalid post!");
+			object.chktick.focus();
+			return false;
+		}else if(fncCheckAllInteger(trim(object.txtpostoffice1.value)))
+		{			
+			alert("Invalid post!");
+			object.chktick.focus();
+			return false;
+		}		
+	}else
+	{
+		if (trim(object.txtpostoffice1_h.value).length==0)
+		{
+			alert("Please enter post!");
+			object.txtpostoffice1_h.focus();
+			object.txtpostoffice1_h.select();
+			return false;
+		}else if(trim(object.txtpostoffice1_h.value)==0)
+		{			
+			alert("Invalid post!");
+			object.txtpostoffice1_h.focus();
+			object.txtpostoffice1_h.select();
+			return false;
+		}else if(isSpclFirstChar(trim(object.txtpostoffice1_h.value)))
+		{	
+		    alert('Invalid post!');
+			object.txtpostoffice1_h.focus();
+			object.txtpostoffice1_h.select();
+			return false;
+		}else if(isSpclChar(trim(object.txtpostoffice1_h.value)))
+		{
+			alert('Invalid post!');
+			object.txtpostoffice1_h.focus();
+			object.txtpostoffice1_h.select();
+			return false;
+		}else if(trim(object.txtpostoffice1_h.value).length < 3)
+		{
+			alert("Invalid post!");
+			object.txtpostoffice1_h.focus();
+			object.txtpostoffice1_h.select();
+			return false;
+		}else if(checkRepeatChars(trim(object.txtpostoffice1_h.value),1))
+		{ 
+			alert("Invalid post!");
+			object.txtpostoffice1_h.focus();
+			object.txtpostoffice1_h.select();
+			return false;
+		}else if(checkAllSameChar(trim(object.txtpostoffice1_h.value)))
+		{
+			alert("Invalid post!");
+			object.txtpostoffice1_h.focus();
+			object.txtpostoffice1_h.select();
+			return false;
+		}else if(fncCheckAllInteger(trim(object.txtpostoffice1_h.value)))
+		{			
+			alert("Invalid post!");
+			object.txtpostoffice1_h.focus();
+			object.txtpostoffice1_h.select();
+			return false;
+		}	
+	}if(object.chktick.checked==true)
+	{	
+		if(trim(object.txtpincode1.value).length==0)
+		{			
+			alert("Please enter pincode!");
+			object.chktick.focus();
+			return false;
+		}
+		if(trim(object.txtpincode1.value)==0)
+		{			
+			alert("Invalid pincode!");
+			object.chktick.focus();
+			return false;
+		}
+		var n1="0123456789";
+		var c1=0;
+		var id1=object.txtpincode1.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid pincode!");
+				object.chktick.focus();
+				return false;
+			}
+		}
+		if(trim(object.txtpincode1.value).length<6)
+		{			
+			alert("Invalid pincode!");
+			object.chktick.focus();
+			return false;
+		}		
+		if((trim(object.txtpincode1.value) < 100000) || (trim(object.txtpincode1.value) > 999999)){
+			alert("Invalid pincode!");
+			object.chktick.focus();
+			return false;
+		}	
+	}else{
+		if (trim(object.txtpincode1_h.value).length==0) 
+		{
+			alert("Please enter pincode!");
+			object.txtpincode1_h.focus();
+			object.txtpincode1_h.select();
+			return false;
+		}
+		if(trim(object.txtpincode1_h.value)==0)
+		{			
+			alert("Invalid pincode!");
+			object.txtpincode1_h.focus();
+			object.txtpincode1_h.select();
+			return false;
+		}
+		var n1="0123456789";
+		var c1=0;
+		var id1=object.txtpincode1_h.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid pincode!");
+				object.txtpincode1_h.focus();
+				object.txtpincode1_h.select();
+				return false;
+			}
+		}
+		if(trim(object.txtpincode1_h.value).length<6)
+		{			
+			alert("Invalid pincode!");
+			object.txtpincode1_h.focus();
+			object.txtpincode1_h.select();
+			return false;
+		}			
+		if((trim(object.txtpincode1_h.value) < 100000) || (trim(object.txtpincode1_h.value) > 999999)){
+			alert("Invalid pincode!");
+			object.txtpincode1_h.focus();
+			object.txtpincode1_h.select();
+			return false;
+		}	
+	}
+	if(object.chktick.checked==true)
+	{	
+		if(object.cbodistrict1.value==0)
+		{			
+			alert("Please select district!");
+			object.chktick.focus();
+			return false;
+		}
+	}else{
+		if(object.cbodistrict1_h.value==0) 
+		{
+			alert("Please select district!");
+			object.cbodistrict1_h.focus();			
+			return false;
+		}
+	}
+	
+	if(object.chktick.checked==true)
+	{		
+	/*	if(trim(object.txtphcode1.value).length==0)
+		{			
+			alert("Please enter phone code!");
+			object.chktick.focus();
+			return false;
+		}
+		if(trim(object.txtphcode1.value)==0)
+		{			
+			alert("Invalid phone code!");
+			object.chktick.focus();
+			return false;
+		}*/
+		if(trim(object.txtphcode1.value).length!=0)
+		{
+		if(trim(object.txtphcode1.value).length<4)
+		{			
+			alert("Invalid phone code!");
+			object.chktick.focus();
+			return false;
+		}
+		var n1="0123456789";
+		var c1=0;
+		var id1=object.txtphcode1.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid phone code!");
+				object.chktick.focus();
+				return false;
+			}
+		}		
+		if((trim(object.txtphcode1.value) < 100) || (trim(object.txtphcode1.value) > 99999))
+		{
+			alert("Invalid phone code!");
+			object.chktick.focus();
+			return false;
+		}
+		}
+	}else{
+		/*if (trim(object.txtphcode1_h.value).length==0)
+		{
+			alert("Please enter the phone code!");
+			object.txtphcode1_h.focus();
+			object.txtphcode1_h.select();
+			return false;
+		}
+		if (trim(object.txtphcode1_h.value)==0)
+		{
+			alert("Invalid phone code!");
+			object.txtphcode1_h.focus();
+			object.txtphcode1_h.select();
+			return false;
+		}*/
+		if(trim(object.txtphcode1.value).length!=0)
+		{
+		if(trim(object.txtphcode1_h.value).length<4){			
+			alert("Invalid phone code!");
+			object.txtphcode1_h.focus();
+			object.txtphcode1_h.select();
+			return false;
+		}
+		var n1="0123456789";
+		var c1=0;
+		var id1=object.txtphcode1_h.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid phone code!");
+				object.txtphcode1_h.focus();
+				object.txtphcode1_h.select();
+				return false;
+			}
+		}		
+		if((trim(object.txtphcode1_h.value) < 100) || (trim(object.txtphcode1_h.value) > 99999)){
+			alert("Invalid phone code!");
+			object.txtphcode1_h.focus();
+				object.txtphcode1_h.select();
+			return false;
+		}	
+		}
+	}
+	if(object.chktick.checked==true){	
+		/*if(trim(object.txtphno1.value).length==0){			
+			alert("Please enter phone no!");
+			object.chktick.focus();
+			return false;
+		}		
+		if(trim(object.txtphno1.value)==0){			
+			alert("Invalid phone no!");
+			object.chktick.focus();
+			return false;
+		}*/
+		if(trim(object.txtphno1.value).length!=0)
+		{
+		if(trim(object.txtphno1.value).length<6){			
+			alert("Invalid phone no!");
+			object.chktick.focus();
+			return false;
+		}		
+		var n1="0123456789";
+		var c1=0;
+		var id1=object.txtphno1.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid phone no!");
+				object.chktick.focus();
+				return false;
+			}
+		}		
+		if((trim(object.txtphno1.value) < 1000000) || (trim(object.txtphno1.value) > 9999999999)){
+			alert("Invalid phone no!");
+			object.chktick.focus();
+			return false;
+		}
+		}
+	}else{
+		/*if (trim(object.txtphno1_h.value).length==0)
+		{
+			alert("Please enter phone no!");
+			object.txtphno1_h.focus();
+			object.txtphno1_h.select();
+			return false;
+		}
+		if (trim(object.txtphno1_h.value)==0)
+		{
+			alert("Invalid phone no!");
+			object.txtphno1_h.focus();
+			object.txtphno1_h.select();
+			return false;
+		}*/
+		if(trim(object.txtphno1.value).length!=0)
+		{
+		if(trim(object.txtphno1_h.value).length<6){			
+			alert("Invalid phone no!");
+			object.txtphno1_h.focus();
+			object.txtphno1_h.select();
+			return false;
+		}
+		var n1="0123456789";
+		var c1=0;
+		var id1=object.txtphno1_h.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid phone no!");
+				object.txtphno1_h.focus();
+				object.txtphno1_h.select();
+				return false;
+			}
+		}		
+		if((trim(object.txtphno1_h.value) < 1000000) || (trim(object.txtphno1_h.value) > 9999999999)){
+			alert("Invalid phone no!");
+			object.txtphno1_h.focus();
+			object.txtphno1_h.select();
+			return false;
+		}
+		}
+	}
+	
+	if (trim(object.txthname2.value).length==0) 
+	{	
+		alert("Please enter house name!");
+		object.txthname2.focus();
+		object.txthname2.select();
+		return false;
+	}else if(trim(object.txthname2.value)==0){			
+			alert("Invalid house name11!");
+			object.txthname2.focus();
+			object.txthname2.select();
+			return false;
+	}else if(isSpclFirstChar(trim(object.txthname2.value))){	
+		    alert('Invalid house name22!');
+			object.txthname2.focus();
+			object.txthname2.select();
+			return false;
+	}else if(isSpclCharHouseName(trim(object.txthname2.value))){
+			alert('Invalid house name33!');
+			object.txthname2.focus();	
+			object.txthname2.select();
+			return false;
+	}else if(trim(object.txthname2.value).length < 3){
+			alert("Invalid house name44!");
+			object.txthname2.focus();
+			object.txthname2.select();
+			return false;
+	}else if(checkRepeatChars(trim(object.txthname2.value),1)){ 
+			alert("Invalid house name55!");
+			object.txthname2.focus();
+			object.txthname2.select();
+			return false;
+	}else if(checkAllSameChar(trim(object.txthname2.value))){
+			alert("Invalid house name66!");
+			object.txthname2.focus();
+			object.txthname2.select();
+			return false;
+	}else if(fncCheckAllInteger(trim(object.txthname2.value))){			
+			alert("Invalid house name77!");
+			object.txthname2.focus();
+			object.txthname2.select();
+			return false;
+	}
+	
+	if (trim(object.txtstreet2.value).length==0) 
+	{
+		
+	}else 
+	{
+	if(trim(object.txtstreet2.value)==0){			
+			alert("Invalid street!");
+			object.txtstreet2.focus();
+			object.txtstreet2.select();
+			return false;
+	}else if(isSpclFirstChar(trim(object.txtstreet2.value))){	
+		    alert('Invalid street!');
+			object.txtstreet2.focus();
+			object.txtstreet2.select();
+			return false;
+	}else if(isSpclCharHouseName(trim(object.txtstreet2.value))){
+			alert('Invalid street!');
+			object.txtstreet2.focus();
+			object.txtstreet2.select();
+			return false;
+	}else if(trim(object.txtstreet2.value).length < 3){
+			alert("Invalid street!");
+			object.txtstreet2.focus();
+			object.txtstreet2.select();
+			return false;
+	}else if(checkRepeatChars(trim(object.txtstreet2.value),1)){ 
+			alert("Invalid street!");
+			object.txtstreet2.focus();
+			object.txtstreet2.select();
+			return false;
+	}else if(checkAllSameChar(trim(object.txtstreet2.value))){
+			alert("Invalid street!");
+			object.txtstreet2.focus();
+			object.txtstreet2.select();
+			return false;
+	}else if(fncCheckAllInteger(trim(object.txtstreet2.value))){			
+			alert("Invalid street!");
+			object.txtstreet2.focus();
+			object.txtstreet2.select();
+			return false;
+	}
+	}
+	if (trim(object.txtplace2.value).length==0) 
+	{
+		alert("Please enter place!");
+		object.txtplace2.focus();
+		object.txtplace2.select();
+		return false;
+	}else if(trim(object.txtplace2.value)==0){			
+			alert("Invalid place!");
+			object.txtplace2.focus();
+			object.txtplace2.select();
+			return false;
+	}else if(isSpclFirstChar(trim(object.txtplace2.value))){	
+		    alert('Invalid place!');
+			object.txtplace2.focus();
+			object.txtplace2.select();
+			return false;
+	}else if(isSpclChar(trim(object.txtplace2.value))){
+			alert('Invalid place!');
+			object.txtplace2.focus();
+			object.txtplace2.select();
+			return false;
+	}else if(trim(object.txtplace2.value).length < 3){
+			alert("Invalid place!");
+			object.txtplace2.focus();
+			object.txtplace2.select();
+			return false;
+	}else if(checkRepeatChars(trim(object.txtplace2.value),1)){ 
+			alert("Invalid place!");
+			object.txtplace2.focus();
+			object.txtplace2.select();
+			return false;
+	}else if(checkAllSameChar(trim(object.txtplace2.value))){
+			alert("Invalid place!");
+			object.txtplace2.focus();
+			object.txtplace2.select();
+			return false;
+	}else if(fncCheckAllInteger(trim(object.txtplace2.value))){			
+			alert("Invalid place!");
+			object.txtplace2.focus();
+			object.txtplace2.select();
+			return false;
+	}
+	if (trim(object.txtpostoffice2.value).length==0) 
+	{
+			alert("Please enter post!");
+			object.txtpostoffice2.focus();
+			object.txtpostoffice2.select();
+			return false;
+	}else if(trim(object.txtpostoffice2.value)==0){			
+			alert("Invalid post!");
+			object.txtpostoffice2.focus();
+			object.txtpostoffice2.select();
+			return false;
+	}else if(isSpclFirstChar(trim(object.txtpostoffice2.value))){	
+		    alert('Invalid post!');
+			object.txtpostoffice2.focus();
+			object.txtpostoffice2.select();
+			return false;
+	}else if(isSpclChar(trim(object.txtpostoffice2.value))){
+			alert('Invalid post!');
+			object.txtpostoffice2.focus();
+			object.txtpostoffice2.select();
+			return false;
+	}else if(trim(object.txtpostoffice2.value).length < 3){
+			alert("Invalid post!");
+			object.txtpostoffice2.focus();
+			object.txtpostoffice2.select();
+			return false;
+	}else if(checkRepeatChars(trim(object.txtpostoffice2.value),1)){ 
+			alert("Invalid post!");
+			object.txtpostoffice2.focus();
+			object.txtpostoffice2.select();
+			return false;
+	}else if(checkAllSameChar(trim(object.txtpostoffice2.value))){
+			alert("Invalid post!");
+			object.txtpostoffice2.focus();
+			object.txtpostoffice2.select();
+			return false;
+	}else if(fncCheckAllInteger(trim(object.txtpostoffice2.value))){			
+			alert("Invalid post!");
+			object.txtpostoffice2.focus();
+			object.txtpostoffice2.select();
+			return false;
+	}	
+	
+	if (trim(object.txtpincode2.value).length==0) 
+	{
+		alert("Please enter pincode!");
+		object.txtpincode2.focus();
+		object.txtpincode2.select();
+		return false;
+	}
+	if (trim(object.txtpincode2.value)==0) 
+	{
+		alert("Invalid pincode!");
+		object.txtpincode2.focus();
+		object.txtpincode2.select();
+		return false;
+	}
+		var n1="0123456789";
+		var c1=0;
+		var id1=object.txtpincode2.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid pincode!");
+				object.txtpincode2.focus();
+				object.txtpincode2.select();
+				return false;
+			}
+		}
+		if(trim(object.txtpincode2.value).length<6){			
+			alert("Invalid pincode!");
+			object.txtpincode2.focus();
+			object.txtpincode2.select();
+			return false;
+		}
+		
+		if((trim(object.txtpincode2.value) < 100000) || (trim(object.txtpincode2.value) > 999999)){
+			alert("Invalid pincode!");
+			object.txtpincode2.focus();
+			object.txtpincode2.select();
+			return false;
+		}
+			
+
+	if (object.cbodistrict2.value==0) 
+	{
+		alert("Please select district!");
+		object.cbodistrict2.focus();		
+		return false;
+	}
+	/*if (trim(object.txtphcode2.value).length==0) 
+	{
+		alert("Please enter phonecode!");
+		object.txtphcode2.focus();
+		object.txtphcode2.select();
+		return false;
+	}
+	if (trim(object.txtphcode2.value)==0) 
+	{
+		alert("Invalid phonecode!");
+		object.txtphcode2.focus();
+		object.txtphcode2.select();
+		return false;
+	}*/
+	if(trim(object.txtphcode2.value).length!=0)
+	{
+	if(trim(object.txtphcode2.value).length<4){			
+			alert("Invalid phonecode!");
+			object.txtphcode2.focus();
+			object.txtphcode2.select();
+			return false;
+	}
+	var n1="0123456789";
+		var c1=0;
+		var id1=object.txtphcode2.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid phonecode!");
+				object.txtphcode2.focus();
+				object.txtphcode2.select();
+				return false;
+			}
+		}	
+		
+		if((trim(object.txtphcode2.value) < 100) || (trim(object.txtphcode2.value) > 99999)){
+			alert("Invalid phonecode!");
+			object.txtphcode2.focus();
+			object.txtphcode2.select();
+			return false;
+		}
+	}
+	/*if (trim(object.txtphno2.value).length==0) 
+	{
+		alert("Please enter phoneno!");
+		object.txtphno2.focus();
+		object.txtphno2.select();
+		return false;
+	}
+	if (trim(object.txtphno2.value)==0) 
+	{
+		alert("Invalid phoneno!");
+		object.txtphno2.focus();
+		object.txtphno2.select();
+		return false;
+	}*/
+	if(trim(object.txtphno2.value).length!=0)
+	{
+	if(trim(object.txtphno2.value).length<6){			
+			alert("Invalid phoneno!");
+			object.txtphno2.focus();
+			object.txtphno2.select();
+			return false;
+	}
+		var n1="0123456789";
+		var c1=0;
+		var id1=object.txtphno2.value;
+		for(c1=0;c1<=id1.length-1;c1++)
+		{
+			if(n1.indexOf(id1.charAt(c1))==-1)
+			{
+				alert("Invalid phoneno!");
+				object.txtphno2.focus();
+				object.txtphno2.select();
+				return false;
+			}
+		}		
+		if((trim(object.txtphno2.value) < 1000000) || (trim(object.txtphno2.value) > 9999999999)){
+			alert("Invalid phoneno!");
+			object.txtphno2.focus();
+			object.txtphno2.select();
+			return false;
+		}	
+	}
+		if(object.txtphcode1.value=='' && object.txtphno1.value!='')
+		{
+			alert("Enter Phone Code!");
+			object.txtphcode1.focus();
+			object.txtphcode1.select();
+			return false;
+		}
+		if(object.txtphcode1.value!='' && object.txtphno1.value==''){
+			alert("Enter Phone No!");
+			object.txtphno1.focus();
+			object.txtphno1.select();
+			return false;
+		}	
+		if(object.txtphcode2.value=='' && object.txtphno2.value!=''){
+			alert("Enter Phone Code!");
+			object.txtphcode2.focus();
+			object.txtphcode2.select();
+			return false;
+		}
+		if(object.txtphcode2.value!='' && object.txtphno2.value==''){
+			alert("Enter Phone No!");
+			object.txtphno2.focus();
+			object.txtphno2.select();
+			return false;
+		}
+		if (trim(object.txtmobno.value).length==0) 
+	{
+		alert("Please enter mobile number!");
+		object.txtmobno.focus();
+		object.txtmobno.select();
+		return false;
+	}
+	if (trim(object.txtmobno.value)==0) 
+	{
+		alert("Invalid mobile number!");
+		object.txtmobno.focus();
+		object.txtmobno.select();
+		return false;
+	}
+	var n1="+0123456789";
+	var c1=0;
+	var id1=object.txtmobno.value;	
+	if(id1.length > 0){
+	if(id1.length < 10){
+		alert("Invalid mobile number!");
+		object.txtmobno.focus();
+		object.txtmobno.select();
+		return false;
+	}
+	if (trim(object.txtmobno.value)==0) 
+	{
+		alert("Invalid mobile number!");
+		object.txtmobno.focus();
+		object.txtmobno.select();
+		return false;
+	}
+	if(checkAllSameChar(trim(object.txtmobno.value))){
+			alert("Invalid mobile number!");
+			object.txtmobno.focus();
+			object.txtmobno.select();
+			return false;
+		}	
+		if((trim(object.txtmobno.value) < 1000000000) || (trim(object.txtmobno.value) > 999999999999)){			
+			alert("Invalid mobile number!");
+			object.txtmobno.focus();
+			object.txtmobno.select();
+			return false;
+		}
+	}
+	for(c1=0;c1<=id1.length-1;c1++)
+	{
+		if(n1.indexOf(id1.charAt(c1))==-1)
+		{
+			alert("Invalid mobile number!");
+			object.txtmobno.focus();
+			object.txtmobno.select();
+			return false;
+		}
+	}
+	id1=object.txtemailid.value;
+	if(id1=='')
+	{
+		alert("Please enter a valid Email!");
+				object.txtemailid.focus();
+				object.txtemailid.select();
+				return false;
+	}
+	else if(id1 != ''){
+		if((!checkEmail(id1))){
+			alert("Invalid Email!");
+				object.txtemailid.focus();
+				object.txtemailid.select();
+				return false;
+		}
+	}
+	id2=object.txtaltemailid.value;
+	if(id2 != ''){
+		if((!checkEmail(id2))){
+			alert("Invalid Alternate Email!");
+				object.txtaltemailid.focus();
+				object.txtaltemailid.select();
+				return false;
+		}
+		if(id1 == id2){
+			alert("Duplicate Email!");
+				object.txtaltemailid.focus();
+				object.txtaltemailid.select();
+				return false;
+		}
+	}
+
+
+
+if(object.entyp.value==3 )
+{
+	if( object.frmuniv.value==0)
+	{
+			alert('Please select From University');
+			object.frmuniv.focus();
+			return false;
+	}
+
+}	
+	var g="0123456789";
+		var c1=0;
+	 		d1=object.cboday.value;
+			d2=object.cbomonth.value;
+			d3=object.cboyear.value;
+			d="/";
+			pymt=d1 + d + d2 + d + d3;
+			if(pymt!=0)
+			var checkstr = "0123456789";
+			var DateField = pymt;
+			var Datevalue = "";
+			var DateTemp = "";
+			var seperator = "/";
+			var day;
+			var month;
+			var year;
+			var leap = 0;
+			var err = 0;
+			var i;
+		   err = 0;
+		   DateValue =DateField;
+		for (i = 0; i < DateValue.length; i++) 
+		   {
+			  if (checkstr.indexOf(DateValue.substr(i,1)) >= 0) 
+			  	{
+			     DateTemp = DateTemp + DateValue.substr(i,1);
+	  			}
+		   }
+		   DateValue = DateTemp;
+	   /* Always change date to 8 digits - string*/
+  		/* if year is entered as 2-digit / always assume 20xx */
+		   if (DateValue.length == 6) 
+		   	{
+	          DateValue = DateValue.substr(0,4) + '20' + DateValue.substr(4,2); 
+			 }
+		   if (DateValue.length != 8) 
+		   	{
+		      err = 19;
+			}
+   /* year is wrong if year = 0000 */
+		   year = DateValue.substr(4,4);
+		   if (year == 0) 
+		   	{
+		      err = 20;
+			}
+			if(year<1754)
+			 {
+			  err=28
+			  }
+   /* Validation of month*/
+		   month = DateValue.substr(2,2);
+		   if ((month < 1) || (month > 12)) 
+   		    {
+		      err = 21;
+			}
+   /* Validation of day*/
+		   day = DateValue.substr(0,2);
+		   if (day < 1) 
+		   {
+		     err = 22;
+   			}
+   /* Validation leap-year / february / day */
+		   if ((year % 4 == 0) || (year % 100 == 0) || (year % 400 == 0)) 
+		   {
+		      leap = 1;
+		   }
+		   if ((month == 2) && (leap == 1) && (day > 29)) 
+		   {
+		      err = 23;
+		   }
+		   if ((month == 2) && (leap != 1) && (day > 28)) 
+		   {
+		      err = 24;
+   			}
+   /* Validation of other months */
+		   if ((day > 31) && ((month == "01") || (month == "03") || (month == "05") || (month == "07") || (month == "08") || (month == "10") || (month == "12"))) 
+		   {
+		      err = 25;
+		   }
+		   if ((day > 30) && ((month == "04") || (month == "06") || (month == "09") || (month == "11"))) 
+		   {
+		      err = 26;
+		   }
+   /* if 00 ist entered, no error, deleting the entry */
+		   if ((day == 0) && (month == 0) && (year == 00)) 
+		   {
+		      err = 0; day = ""; month = ""; year = ""; seperator = "";
+		   }
+   /* if no error, write the completed date to Input-Field (e.g. 13.12.2001) */
+		   if (err == 0) 
+		   {
+		      DateField.value = day + seperator + month + seperator + year;
+		   }
+   /* Error-message if err != 0 */
+			else
+		    {
+      			alert("Date of birth is incorrect!");
+				object.cbomonth.focus();
+			   	return false;
+  			 }			 
+			 if(object.hidQualiType.value==1)
+			 {
+			    if (object.cboexam.value==0) 
+				{
+					alert("Please select Name of Examination!");
+					object.cboexam.focus();
+					return false;
+				}
+				if (object.iUnivCod.value==0) 
+				{
+					alert("Please select Name of the Board!");
+					object.iUnivCod.focus();
+					return false;
+				}
+				
+				if (trim(object.cBachRegNo.value).length==0) 
+				{
+					alert("Please enter Register Number!");
+					object.cBachRegNo.focus();
+					object.cBachRegNo.select();
+					return false;
+				}
+				if (trim(object.cBachRegNo.value)==0) 
+				{
+					alert("Invalid Register Number!");
+					object.cBachRegNo.focus();
+					object.cBachRegNo.select();
+					return false;
+				}
+				
+				var n1="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+				var c1=0;
+				var id1=object.cBachRegNo.value;
+				for(c1=0;c1<=id1.length-1;c1++)
+				{
+					if(n1.indexOf(id1.charAt(c1))==-1)
+					{
+						alert("Invalid Register Number!");
+						object.cBachRegNo.focus();
+						object.cBachRegNo.select();
+						return false;
+					}
+				}
+				if (object.iBachExamYear.value==0) 
+				{
+					alert("Please select Year of Passing!");
+					object.iBachExamYear.focus();
+					return false;
+				}
+				var age_18;
+				age_18 = (object.cboyear.value*1)+16;				
+				if (object.iBachExamYear.value < age_18) 
+				{
+					alert("Invalid Year of Passing!");
+					object.iBachExamYear.focus();
+					return false;
+				}
+				//alert(object.txtpercmark.value);
+				if (trim(object.txtpercmark.value).length==0) 
+				{
+					alert("Please enter Percentage of Marks!");
+					object.txtpercmark.focus();
+					object.txtpercmark.select();
+					return false;
+				}
+				if (trim(object.txtpercmark.value)==0) 
+				{
+					alert("Invalid Percentage!");
+					object.txtpercmark.focus();
+					object.txtpercmark.select();
+					return false;
+				}
+				if (trim(object.txtpercmark.value)>100) 
+				{
+					alert("Invalid Percentage!");
+					object.txtpercmark.focus();
+					object.txtpercmark.select();
+					return false;
+				}
+				
+				var n1="1234567890.";
+				var c1=0;
+				var id1=object.txtpercmark.value;
+				for(c1=0;c1<=id1.length-1;c1++)
+				{
+					if(n1.indexOf(id1.charAt(c1))==-1)
+					{
+						alert("Invalid Percentage!");
+						object.txtpercmark.focus();
+						object.txtpercmark.select();
+						return false;
+					}
+				}
+				if (object.iResClass.value==0) 
+				{
+					alert("Please select Division!");
+					object.iResClass.focus();
+					return false;
+				}
+				if (trim(object.txtrank.value).length!=0) 
+				{
+					if (trim(object.txtrank.value)==0) 
+					{
+						alert("Invalid Rank!");
+						object.txtrank.focus();
+						object.txtrank.select();
+						return false;
+					}
+				}
+				var n1="1234567890";
+				var c1=0;
+				var id1=object.txtrank.value;
+				for(c1=0;c1<=id1.length-1;c1++)
+				{
+					if(n1.indexOf(id1.charAt(c1))==-1)
+					{
+						alert("Invalid Rank!");
+						object.txtrank.focus();
+						object.txtrank.select();
+						return false;
+					}
+				}
+			 }
+				if(object.hidAdd.value==1)
+				{
+					if(object.seladd.value ==0)
+					{
+						alert("Please choose Additional Language Opted!");
+						object.seladd.focus();
+						return false;
+					}//end of if
+				}//end of if
+				
+				//alert(object.flgedit.value);
+				if(object.flgedit.value == 0){	  // first time registration			
+					 if (object.file.value=='') 
+					 {	
+						alert("Please browse your photo!");
+						object.file.focus();
+						return false;					
+					 }
+					  if (object.file12.value=='') 
+					 {	
+						alert("Please browse your signature!");
+						object.file12.focus();
+						return false;					
+					 }
+				}
+				if(confirm("Are you sure the details given are correct	"))
+				document.forms[getElementById("entryform1reg")].submit();
+				else
+				return false;
+}
+
+
+//EOF
+function callPopupSubjectFnc(object){
+	
+	var yr = document.getElementById("year_of_adm").value;
+	var studid = document.getElementById("studid").value;		
+	var cospcod = document.getElementById("cospcod").value;	
+	var entyp = document.getElementById("entyp").value;
+		
+	mypopup('enrolment_pdf.php?studid='+studid+'&yr='+yr+'&enttype='+entyp, 700, 480);
+}
+
+function mypopup(url,width,height)
+ {  	
+   width=window.screen.width;
+   height=window.screen.height;
+   mywindow = window.open (url,"mywindow","location=0,status=1,scrollbars=1,resizable=1,menubar=0,toolbar=no,width="+width+",height="+height);
+   //mywindow.moveTo(0,0);
+   mywindow.focus();
+ } 
+ 
+ function callPopupFinalListEnrolFnc(object){	
+	var yr = document.getElementById("year_of_admission").value;
+	var college = document.getElementById("college").value;		
+	var cospcod = document.getElementById("course").value;			
+	mypopup('finalListEnrolment_pdf.php?yr='+yr+'&col='+college+'&cosp='+cospcod, 700, 480);
+}
+
+function checkEmail(id) {
+	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(id)) {
+		return (true);
+	}
+	return (false);
+}
+
+function isValidKey(evt)
+{	
+	var charCode = (evt.which) ? evt.which : event.keyCode	
+	if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode != 32)
+	
+		 	return false;
+	return true;
+}
+
+function isSpclChar(object)
+{	
+	var iChars = "!@#$%^&*()+=-[]\\\';,/{}|\":<>?";
+                for (var i = 0; i < object.length; i++) 
+				{                	                  	       
+                      if (iChars.indexOf(object.charAt(i)) != -1)
+					  {                                	
+	                  //alert ("The box has special characters. \nThese are not allowed.\n");
+	                   //return false;
+	                  return true;
+                	}
+                 }
+}
+
+function fncCheckAllInteger(object)
+{	
+	var iChars = "0123456789";
+		var iValidChars = "'.";
+		var flg = 0;		
+                for (var j = 0; j < object.length; j++) 
+				{                	               	       
+                                if (iChars.indexOf(object.charAt(j)) != -1)
+								{                                	
+	                                indexChar = object.charAt(j);
+	                                flg=flg+1;   	                                                        	                                                               
+                                }else
+								{                                	
+                                	flg = 0                                	
+								   break;	
+		                		}
+                 }
+                 if(flg == 0)
+				 {
+                 	 return false;
+                 }else
+				 {
+                 	 return true;
+                 }
+}
+
+
+
+function checkRepeatChars(object,flag)
+{
+	var j = object.length - 1;
+		var indexChar;
+		//var iChars = "!_@#$%^&*()+=-[]\\\;,/{}|\":<>?0123456789";
+		if(flag == 1)
+		{  // street name
+		 var iValidChars = "/.-\'"; 
+		}else if(flag == 2)
+		{  // research
+		 var iValidChars = "'.?)\"(][,-/"; 
+		}
+		for (var i = 0; i < j; i=i+1)
+		{  
+			var firstchar = object.charAt(i);											
+			if (iValidChars.indexOf(object.charAt(i)) != -1)
+			{ 																 			 	        		          
+					var secondchar = object.charAt(i+1);
+					i=i+1; 
+					if(firstchar == secondchar)
+					{  
+						return true;
+					}											    	
+				}																					
+		}// end of for loop		                		
+}
+
+
+
+function checkAllSameChar(object)
+{	
+	var ln = object.length;
+	var firstChar = object.charAt(0);
+	var char2;
+	var flag=0;	
+	for(var i=1;i<ln;i=i+1)
+	{
+		char1 = object.charAt(i);				 			 	        		          				
+		if(firstChar != char1)
+		{    // not all characters are same
+			flag = 1;
+			break;
+		}
+	}
+	if(flag == 0)
+	{
+		return true;
+	}
+}
+
+function isSpclCharName(object)
+{	
+	var len = object.length - 1;
+		var indexChar;
+		var iChars = "!_@#$%^&*()+=-[]\\\;,/{}|\":<>?0123456789";
+		var iValidChars = "'.";
+                for (var j = 0; j < object.length; j++)
+				{                	               	       
+                                if (iChars.indexOf(object.charAt(j)) != -1) 
+								{                                	
+	                                indexChar = object.charAt(j);
+	                                return true;
+                                }else
+								{
+								         for (var i = 0; i < j; i=i+1)
+										 {  
+											var firstchar = object.charAt(i);											
+											if (iValidChars.indexOf(object.charAt(i)) != -1) 
+											{ 																 			 	        		          
+												   var secondchar = object.charAt(i+1);
+												   i=i+1; 
+												   if(firstchar == secondchar)
+												   {  
+												 	 return true;
+												   }											    	
+											}																					
+										}  // end of for loop
+		                		}
+                 }
+}
+
+
+function isSpclFirstChar(object)
+{
+	//alert(object.charAt(0)+" "+object.value);
+	var iChars = "!_.@#$%^&*()+=-[]\\\';,/{}|\":<>?";
+	 if (iChars.indexOf(object.charAt(0)) != -1)
+	 {                  		          
+	        return true;
+      }
+}
+
+
+function isSpclCharHouseName(object)
+{	
+	var iChars = "\!@#$%^&*()+=[]\\\;{}|\":<>?";
+                for (var i = 0; i < object.length; i++) 
+				{                	               	       
+                                if (iChars.indexOf(object.charAt(i)) != -1)
+								{                                	
+	                               alert ("The box has special characters. \nThese are not allowed.\n"+ iChars);
+	                                //return false;
+	                                return true;
+                				}
+                 }
+}
+
+function trim(str) {
+        return str.replace(/^\s+|\s+$/g,"");
+ }
+
+function check(chktick,thisForm)
+{ 
+ 
+if(chktick.checked==true)
+ {
+ 	 	
+ 	thisForm.txthname2.value=thisForm.txthname1.value=thisForm.txthname1_h.value;  	
+	thisForm.txtstreet2.value=thisForm.txtstreet1.value=thisForm.txtstreet1_h.value;
+	thisForm.txtstreet2.value=thisForm.txtstreet1.value=thisForm.txtstreet1_h.value;
+	thisForm.txtplace2.value=thisForm.txtplace1.value=thisForm.txtplace1_h.value;
+	thisForm.txtpostoffice2.value=thisForm.txtpostoffice1.value=thisForm.txtpostoffice1_h.value;
+	thisForm.txtpincode2.value=thisForm.txtpincode1.value=thisForm.txtpincode1_h.value;	
+	thisForm.cbodistrict2.value=thisForm.cbodistrict1.value=thisForm.cbodistrict1_h.value;	
+	thisForm.txtphcode2.value=thisForm.txtphcode1.value=thisForm.txtphcode1_h.value;
+	thisForm.txtphno2.value=thisForm.txtphno1.value=thisForm.txtphno1_h.value;
+    // disabling the textboxes
+	thisForm.txthname2.disabled=thisForm.txthname1_h.disabled=1;  	
+	thisForm.txtstreet2.disabled=thisForm.txtstreet1_h.disabled=1;	
+	thisForm.txtplace2.disabled=thisForm.txtplace1_h.disabled=1;
+	thisForm.txtpostoffice2.disabled=thisForm.txtpostoffice1_h.disabled=1;
+	thisForm.txtpincode2.disabled=thisForm.txtpincode1_h.disabled=1;
+	thisForm.cbodistrict2.disabled=thisForm.cbodistrict1_h.disabled=1;	
+	thisForm.txtphcode2.disabled=thisForm.txtphcode1_h.disabled=1;
+	thisForm.txtphno2.disabled=thisForm.txtphno1_h.disabled=1;
+ }else{
+ 	thisForm.txthname2.value = '';
+ 	thisForm.txthname2.disabled = 0;
+ 	thisForm.txtstreet2.value='';
+	thisForm.txtstreet2.value='';
+	thisForm.txtplace2.value='';
+	thisForm.txtpostoffice2.value='';
+	thisForm.txtpincode2.value='';
+	thisForm.cbodistrict2.value=0;	
+	thisForm.txtphcode2.value='';
+	thisForm.txtphno2.value='';
+	 // enabling the textboxes
+	thisForm.txthname2.disabled=thisForm.txthname1_h.disabled=0;  	
+	thisForm.txtstreet2.disabled=thisForm.txtstreet1_h.disabled=0;	
+	thisForm.txtplace2.disabled=thisForm.txtplace1_h.disabled=0;
+	thisForm.txtpostoffice2.disabled=thisForm.txtpostoffice1_h.disabled=0;
+	thisForm.txtpincode2.disabled=thisForm.txtpincode1_h.disabled=0;
+	thisForm.cbodistrict2.disabled=thisForm.cbodistrict1_h.disabled=0;	
+	thisForm.txtphcode2.disabled=thisForm.txtphcode1_h.disabled=0;
+	thisForm.txtphno2.disabled=thisForm.txtphno1_h.disabled=0;
+ }
+}
+
+
+
+
+
+
+
+
+
+
+
+//8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+function calc(){
+  one = document.autoSumForm.firstBox.value;
+  two = document.autoSumForm.secondBox.value; 
+  document.autoSumForm.thirdBox.value = (one * 1) + (two * 1);
+}
+
+function startCalc_Status8_Total(){
+  interval_Status8_Total = setInterval("status8_Total()",1);
+}
+function stopCalc_Status8_Total(){
+  clearInterval(interval_Status8_Total);
+}
+function startCalc_Status8_max_Total(){
+  interval_Status8_max_Total = setInterval("status8_max_Total()",1);
+}
+function stopCalc_Status8_max_Total(){
+  clearInterval(interval_Status8_max_Total);
+}
+
+//status7
+function startCalc_Status7_Total(){
+  interval_Status7_Total = setInterval("status7_Total()",1);
+}
+function stopCalc_Status7_Total(){
+  clearInterval(interval_Status7_Total);
+}
+function startCalc_Status7_max_Total(){
+  interval_Status7_max_Total = setInterval("status7_max_Total()",1);
+}
+function stopCalc_Status7_max_Total(){
+  clearInterval(interval_Status7_max_Total);
+}
+
+//status1
+function startCalc_Status3_Total(){
+  interval_Status3_Total = setInterval("status3_Total()",1);
+}
+function stopCalc_Status3_Total(){
+  clearInterval(interval_Status3_Total);
+}
+function startCalc_Status3_max_Total(){
+  interval_Status3_max_Total = setInterval("status3_max_Total()",1);
+}
+function stopCalc_Status3_max_Total(){
+  clearInterval(interval_Status3_max_Total);
+}
+//status1
+function startCalc_getparttotal(){
+  interval_getparttotal = setInterval("getparttotal()",1);
+}
+function startCalc_getparttotal_max(){
+  interval_getparttotal_max = setInterval("getparttotal_max()",1);
+}
+function startCalc_getoptionaltotal(){
+  interval_getoptionaltotal = setInterval("getoptionaltotal()",1);
+}
+function startCalc_getoptionaltotal_max(){
+  interval_getoptionaltotal_max = setInterval("getoptionaltotal_max()",1);
+}
+
+function stopCalc_getparttotal(){
+  clearInterval(interval_getparttotal);
+}
+function stopCalc_getparttotal_max(){
+  clearInterval(interval_getparttotal_max);
+}
+function stopCalc_getoptionaltotal(){
+  clearInterval(interval_getoptionaltotal);
+}
+function stopCalc_getoptionaltotal_max(){
+  clearInterval(interval_getoptionaltotal_max);
+}
+
+//sttsu1
+function getparttotal()
+	{
+	//alert('hi');
+	a= document.entryform1.part1_min_mark.value;
+	b=document.entryform1.part2_min_mark.value;
+	/*c=document.entryform1.part3_min_mark.value;*/
+	document.entryform1.part_total.value=(a * 1) + (b * 1);
+
+	}
+function getparttotal_max()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	c= document.entryform1.part1_max_mark.value;
+	d=document.entryform1.part2_max_mark.value;
+	/*e=document.entryform1.part3_max_mark.value;*/
+	document.entryform1.part_max_total.value=(c * 1) + (d * 1);
+	}
+function getoptionaltotal()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	f= document.entryform1.main_min_mark.value;
+	g=document.entryform1.sub1_min_marks.value;
+	h=document.entryform1.sub2_min_marks.value;
+	document.entryform1.optional_part_total.value=(f * 1) + (g * 1) + (h * 1);
+	h1=document.entryform1.optional_part_total.value;
+	a= document.entryform1.part1_min_mark.value;
+	b=document.entryform1.part2_min_mark.value;
+	document.entryform1.part_total.value=(a * 1) + (b * 1)+ (h1 * 1);
+	}
+function getoptionaltotal_max()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	j= document.entryform1.main_max_marks.value;
+	k=document.entryform1.sub1_max_marks.value;
+	l=document.entryform1.sub2_max_marks.value;
+	document.entryform1.optional_part_max_total.value=(j * 1) + (k * 1) + (l * 1);
+	h3=document.entryform1.optional_part_max_total.value;
+	c= document.entryform1.part1_max_mark.value;
+	d=document.entryform1.part2_max_mark.value;
+	document.entryform1.part_max_total.value=(c * 1) + (d * 1)+ (h3 * 1);
+	}
+//statsu3	
+	function status3_Total()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	m= document.entryform1.status3_main1_min_mark.value;
+	n=document.entryform1.status3_main2_min_mark.value;
+	o=document.entryform1.status3_main3_min_mark.value;
+	document.entryform1.status3main_min_total.value=(m * 1) + (n * 1) + (o * 1);
+
+	}
+function status3_max_Total()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	m= document.entryform1.status3_main1_max_mark.value;
+	n=document.entryform1.status3_main2_max_mark.value;
+	o=document.entryform1.status3_main3_max_mark.value;
+	document.entryform1.status3main_max_total.value=(m * 1) + (n * 1) + (o * 1);
+
+	}
+	//statsu3	
+	function status7_Total()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	p= document.entryform1.status7_voc_min_mark.value;
+	q=document.entryform1.status7_opt1_min_mark.value;
+	r=document.entryform1.status7_opt2_min_mark.value;
+	document.entryform1.status7_min_total.value=(p * 1) + (q * 1) + (r * 1);
+
+	}
+function status7_max_Total()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	s= document.entryform1.status7_voc_max_mark.value;
+	t=document.entryform1.status7_opt1_max_mark.value;
+	u=document.entryform1.status7_opt2_max_mark.value;
+	document.entryform1.status7_max_total.value=(s * 1) + (t * 1) + (u * 1);
+
+	}
+	function status8_Total()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	p= document.entryform1.status8_core_min_marks.value;
+	q=document.entryform1.status8_voc_min_mark.value;
+	r=document.entryform1.status8_aux_min_marks.value;
+	document.entryform1.status8_min_total.value=(p * 1) + (q * 1) + (r * 1);
+
+	}
+	function status8_max_Total()
+	{
+	/*alert(part1_min_mark);alert(part2_min_mark);alert(part3_min_mark);*/
+	s= document.entryform1.status8_core_max_marks.value;
+	t=document.entryform1.status8_voc_max_mark.value;
+	u=document.entryform1.status8_aux_max_marks.value;
+	document.entryform1.status8_max_total.value=(s * 1) + (t * 1) + (u * 1);
+
+	}

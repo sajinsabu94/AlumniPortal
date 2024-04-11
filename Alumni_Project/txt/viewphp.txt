@@ -1,0 +1,135 @@
+<?php
+  include_once("dbconfig.php");
+  include_once("/page_design/shop_page.php");
+  if(isset($_REQUEST["id"]))
+  {
+    $add="SELECT branch_id, branch_name, branch_reg, branch_type, branch_address, branch_pin, branch_state, branch_email, branch_phone, branch_charge_name, branch_charge_address,         branch_charge_pin, branch_charge_email, branch_charge_phone from tbl_shop_branch where branch_id='".$_REQUEST["id"]."'";
+    $pointadd=mysql_query($add);
+    $row=mysql_fetch_array($pointadd);
+  if(isset($_POST["submit"]))
+  {
+   $shopvalue_id="1001";
+   $branchmaxqry="SELECT MAX(shopvalue_id)as shopvalue_id FROM tbl_shopvalue";
+   $branchresult=mysql_query($branchmaxqry);
+   $branchrow=mysql_fetch_array($branchresult);
+   if($branchrow["shopvalue_id"]=="")
+   {
+     $shopvalue_id="1001";
+   }
+  else
+  {
+   $shopvalue_id=(int)$branchrow["shopvalue_id"]+1;
+  }
+  $branchinsqry="INSERT INTO tbl_shopvalue (shopvalue_id,shop_id,shop_name,shop_regno,value,date)VALUES ('".$shopvalue_id."','".$row["branch_id"]."','".$row["branch_name"]."','".$row  ["branch_reg"]."','".$_POST["branch_point"]."','".date("Y-m-d")."') ";
+  $es=mysql_query($branchinsqry);
+  }
+}
+?>
+
+ <div class="col-md-7" style="margin-top:200px; margin-left:235px;">
+      <h3><center>
+        <div><p >Change Shop Points</p></div>
+        <div style="margin-left:58px; margin-right:-160">
+        <form class="form-horizontal" method="post">
+        <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Enter Current Points</label>
+      <div class="col-sm-10">
+        <input name="branch_point" type="text"  class="form-control" id="branch_point" placeholder="Enter This Shop's Point"/>
+      </div>
+    </div>
+  <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Branch ID</label>
+      <div class="col-sm-10">
+        <input name="view_branch_id" type="text" readonly value="<?php echo $row["branch_id"] ?> " class="form-control" id="view_branch_id" placeholder="Enter name"/>
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Branch Name</label>
+      <div class="col-sm-10">
+        <input name="view_branch_name" type="text"  readonly value="<?php echo $row["branch_name"] ?>" class="form-control" id="view_branch_name" placeholder="Enter Registration Number"/>
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Reg No:</label>
+      <div class="col-sm-10">
+        <input name="view_branch_reg" type="text" readonly value="<?php echo $row["branch_reg"] ?>" class="form-control" id="view_branch_reg" placeholder="Enter name"/>
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Branch Type</label>
+      <div class="col-sm-10">
+        <textarea name="view_branch_type" rows="5" readonly value="<?php echo $row["branch_type"] ?>" class="form-control" id="view_branch_type" placeholder="Enter Address"></textarea>
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Address:</label>
+      <div class="col-sm-10">
+        <input name="view_branch_address" type="text" readonly value="<?php echo $row["branch_address"] ?>" class="form-control" id="view_branch_address" placeholder="Enter Pin Number">
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Pin:</label>
+      <div class="col-sm-10">
+        <input name="view_branch_pin" type="text" readonly value="<?php echo $row["branch_pin"] ?>" class="form-control" id="view_branch_pin" placeholder="Enter State">
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">State:</label>
+      <div class="col-sm-10">
+        <input name="view_branch_state" type="text" readonly value="<?php echo $row["branch_state"] ?>" class="form-control" id="view_branch_state" placeholder="Enter e-mail">
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">E-mail:</label>
+      <div class="col-sm-10">
+        <input name="view_branch_email" type="text" readonly  value="<?php echo $row["branch_email"] ?>" class="form-control" id="view_branch_email" placeholder="Enter phone Number">
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Phone</label>
+      <div class="col-sm-10">
+        <input name="view_branch_phone" type="text" readonly  value="<?php echo $row["branch_phone"] ?>" class="form-control" id="view_branch_phone" placeholder="Enter phone Number">
+      </div>
+    </div>
+    
+    <div class="form-group">OWNER DETAILS </div>
+    
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Name of Owner:</label>
+      <div class="col-sm-10">
+        <input name="branch_owner_name" type="text" readonly value="<?php echo $row["branch_charge_name"] ?>" class="form-control" id="branch_owner_name" placeholder="Enter owner name">
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Owner Address:</label>
+      <div class="col-sm-10">
+        <textarea name="branch_owner_address" rows="5" readonly value="<?php echo $row["branch_charge_address"] ?>" class="form-control" id="branch_owner_address" placeholder="Enter Address"></textarea>
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email"> OwnerPin:</label>
+      <div class="col-sm-10">
+        <input name="branch_owner_pin" type="text" readonly value="<?php echo $row["branch_charge_pin"] ?>" class="form-control" id="branch_owner_pin" placeholder="Enter OWNER pin">
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">E-mail:</label>
+      <div class="col-sm-10">
+        <input name="branch_owner_email" type="text" readonly value="<?php echo $row["branch_charge_email"] ?>" class="form-control" id="branch_owner_email" placeholder="Enter e-mail">
+      </div>
+    </div>
+     <div class="form-group">
+      <label class="control-label col-sm-2 mystyle"   for="email">Ph: No::</label>
+      <div class="col-sm-10">
+        <input name="branch_owner_phone" type="text"  readonly value="<?php echo $row["branch_charge_phone"] ?>" class="form-control" id="branch_owner_phone" placeholder="Enter Phone number">
+      </div>
+    </div>
+   
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" name="submit" class="btn btn-default">OK</button>
+      </div> </form></div>
+        <p>&nbsp;</p>
+      </center>
+      </h3>
+    </div>

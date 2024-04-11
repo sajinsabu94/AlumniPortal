@@ -1,0 +1,303 @@
+						/****************************************************************************************************
+						# 											Script Info												#
+						#===================================================================================================#
+						# File: 						__ajaxPage.js  														#
+						# Created: 						06/OCT/2009															#
+						# Modified: 																						#
+						# Author: 						Team kucc														#
+						# Project Name:					kucc_enrollment																#
+						# Development Center			kucc,University of Kerala, Thiruvananthapuram, Kerala, India.		#
+						# Website: 						http://www.kucc.keralauniversity.edu/												#
+						# Requirements: 				PHP 5 & above / MySQl 												#														
+						*****************************************************************************************************/
+
+	function JSfncGetXMLHttpRequest(){
+		var http_request = false;
+		if (window.XMLHttpRequest) { // Mozilla, Safari,...
+			http_request = new XMLHttpRequest();
+			if (http_request.overrideMimeType) {
+				http_request.overrideMimeType('text/html');
+			}
+		} else if (window.ActiveXObject) { // IE
+			try {
+				http_request = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					http_request = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {}
+			}
+		}
+		if (!http_request) {
+			return false;
+		}
+		return http_request;
+	}
+	
+function displayCoursesofCollege(colcod,val)
+{
+var course=0;
+if(val==1)
+course=document.getElementById('seleCourseGroup').value;
+
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divCourse').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getIndexAjaxdetails.php?indxcolcod='+colcod+'&course='+course, true);
+		XmlReg.send(null);
+}
+
+
+	
+	
+function populatescheme(cospcod)
+{
+
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('selscheme').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		
+		XmlReg.open('GET', 'getIndexAjaxdetails.php?cospForScheme='+cospcod, true);
+		XmlReg.send(null);
+}
+
+
+
+function populatesem(scheme)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('selsem').innerHTML = XmlReg.responseText;//divsem
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		
+		XmlReg.open('GET', 'getIndexAjaxdetails.php?SchemeForSem='+scheme, true);
+		XmlReg.send(null);
+}
+
+
+
+
+function populateSubject()
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+	var flgval=0;
+	
+	var schemecod=document.getElementById('selscheme').value;
+	var sem=document.getElementById('selsem').value;
+	
+	if(document.getElementById('chkCommon').checked==true)
+	flgval=1;
+	else
+	flgval=0;
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				document.getElementById('selsubject').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';				
+		}
+		};		
+		
+		
+		XmlReg.open('GET', 'getIndexAjaxdetails.php?SubjectForSem='+sem+'&schemecod='+schemecod+'&flgval='+flgval, true);
+		XmlReg.send(null);
+}
+
+
+
+function PopulateSchemeForIndexcard(val,val2)
+{
+	var course=document.getElementById('seleCourseGroup').value;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divscheme').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getIndexAjaxdetails.php?indexcourse='+val+'&indexval='+val2+'&mainCourseGrp='+course, true);
+		XmlReg.send(null);
+
+}
+
+function populateSubjectForIndexcard(val,schm,course,val2)
+{
+	if(val2=1)
+	var mainCourseGrpourse=document.getElementById('seleCourseGroup').value;
+	var college=document.getElementById('selcollege').value; 
+	var course=document.getElementById('selcourse').value;alert(val2);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divcommonsubj').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getIndexAjaxdetails.php?indxscheme='+schm+'&indxcourse='+course+'&indxsem='+val+'&indexval='+val2+'&mainCourseGrpourse='+mainCourseGrpourse+'&selcol='+college, true);
+		XmlReg.send(null);
+
+}//EOF
+
+
+function populateSemester(val,val2)
+{
+	var course=document.getElementById('selcourse').value;
+	var mainCourseGrpourse=document.getElementById('seleCourseGroup').value;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg){
+			alert('Ajax Not Supported');
+			return;
+		}		
+		XmlReg.onreadystatechange = function(){
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				
+					document.getElementById('divsem').innerHTML = XmlReg.responseText;
+				
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+		XmlReg.open('GET',  'getIndexAjaxdetails.php?indexscheme='+val+'&indexcoursecod='+course+'&indexval='+val2+'&mainCourseGrpourse='+mainCourseGrpourse, true);
+		XmlReg.send(null);
+
+}
+
+function validateReject()
+	{
+		var tot=document.getElementById('totcnt').value;
+		var allrejval=trim(document.getElementById('txtrejall').value);
+		for(var i=1;i<=tot;i++)
+		{
+			var indchkval=document.getElementById('chkrej'+i);
+			if(indchkval.checked==1)
+			{
+			var indrejval=trim(document.getElementById('txtrej'+i).value);
+				if((indrejval=='')&&(allrejval==''))
+				{
+					alert('Enter the reason for rejection');
+					document.getElementById('txtrej'+i).focus();
+					return false;
+				}
+			}
+			
+			
+		}//end of for
+	}
+	
+	function SelectAll()
+	{
+		var chkall=document.getElementById('chkrejall');
+		if(chkall.checked==1)
+		{
+		var tot=document.getElementById('totcnt').value;	
+		for(var i=1;i<=tot;i++)
+		{
+			var indchkval=document.getElementById('chkrej'+i);
+			indchkval.checked=true;
+		}//end of for
+		}//End of if
+		else if(chkall.checked==0)
+		{
+		var tot=document.getElementById('totcnt').value;	
+		for(var i=1;i<=tot;i++)
+		{
+			var indchkval=document.getElementById('chkrej'+i);
+			indchkval.checked=false;
+		}//end of for
+		}//End of if
+	}//end of for
+function CheckReasonEntered()
+	{
+		var txtVal=document.getElementById('txtrejectReason').value;
+		if(trim(txtVal).length==0)
+		{
+			alert("Enter Reason of Rejection");
+			document.getElementById('txtrejectReason').focus();
+			return false;
+		}
+		else return true;
+	}
+
+function trim(str) {
+        return str.replace(/^\s+|\s+$/g,"");
+ }
+

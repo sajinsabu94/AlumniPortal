@@ -1,0 +1,496 @@
+						/****************************************************************************************************
+						# 											Script Info												#
+						#===================================================================================================#
+						# File: 						__ajaxPage.js  														#
+						# Created: 						06/OCT/2009															#
+						# Modified: 																						#
+						# Author: 						Team kucc														#
+						# Project Name:					kucc_enrollment																#
+						# Development Center			kucc,University of Kerala, Thiruvananthapuram, Kerala, India.		#
+						# Website: 						http://www.kucc.keralauniversity.edu/												#
+						# Requirements: 				PHP 5 & above / MySQl 												#														
+						*****************************************************************************************************/
+
+	function JSfncGetXMLHttpRequest(){
+		var http_request = false;
+		if (window.XMLHttpRequest) { // Mozilla, Safari,...
+			http_request = new XMLHttpRequest();
+			if (http_request.overrideMimeType) {
+				http_request.overrideMimeType('text/html');
+			}
+		} else if (window.ActiveXObject) { // IE
+			try {
+				http_request = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try {
+					http_request = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e) {}
+			}
+		}
+		if (!http_request) {
+			return false;
+		}
+		return http_request;
+	}
+	
+function getSemForTheCourse(val,flg)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('selsem').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?coursecod='+val+'&flgVal='+flg, true);
+		XmlReg.send(null);
+
+}
+
+function getMonthofExam(val,flg)
+{
+	var course=document.getElementById('selcourse').value;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('selmonth').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?sem='+val+'&mncrs='+course+'&flgVal='+flg, true);
+		XmlReg.send(null);
+	
+}
+
+function getyearofExam(val,flg)
+{
+	var course=document.getElementById('selcourse').value;
+	var sem=document.getElementById('selsem').value;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('selyr').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?mnth='+val+'&semval='+sem+'&mncrs='+course+'&flgVal='+flg, true);
+		XmlReg.send(null);
+}
+function getCollegeForSanctionedStrength(val)
+{
+		XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('selcol').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?mncrs='+val, true);
+		XmlReg.send(null);
+}
+function displayCourses(val,cntrl,yr)
+{
+	var course=document.getElementById(cntrl).value;
+	var yrofadmn=document.getElementById(yr).value;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divCospcod').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?mncrse='+course+'&colcod='+val+'&yrofadmn='+yrofadmn, true);
+		XmlReg.send(null);
+}
+
+
+
+function populateSchemeForMemo(cospcod)
+{//alert(cospcod);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divScheme').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?memocospcod='+cospcod, true);
+		XmlReg.send(null);
+}
+
+function populateSemForMemo(cntrl,scheme)
+{
+	var cospcod=document.getElementById(cntrl).value; 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divSem').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?memoscheme='+scheme+'&memoCospcod='+cospcod, true);
+		XmlReg.send(null);
+}
+
+function populateMnthNYrForMemo(cntrlCosp,cntrlScheme,sem)
+{
+	var cospcod=document.getElementById(cntrlCosp).value; 
+	var scheme=document.getElementById(cntrlScheme).value; 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divMnthNYr').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?memosem='+sem+'&memoScheme='+scheme+'&memoCospcod='+cospcod, true);
+		XmlReg.send(null);
+}
+
+function populateCollegeForMemo(cntrlCosp,cntrlScheme,CntrlSem,mnthYr)
+{
+	var cospcod=document.getElementById(cntrlCosp).value; 
+	var scheme=document.getElementById(cntrlScheme).value; 
+	var sem=document.getElementById(CntrlSem).value; 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divCollege').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?memoMnthNYr='+mnthYr+'&memoSem='+sem+'&memoScheme='+scheme+'&memoCospcod='+cospcod, true);
+		XmlReg.send(null);
+}
+
+
+function PopulateScheme(cospcod)
+{//alert(cospcod);
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divScheme').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?Cospcod='+cospcod, true);
+		XmlReg.send(null);
+}//EOF
+
+function PopulateSemester(scheme,cospcod)
+{//alert(scheme);
+	var Cospcod=document.getElementById(cospcod).value; 
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divSem').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?Cospcodscheme='+Cospcod+'&Scheme='+scheme, true);
+		XmlReg.send(null);
+}//EOF
+
+function fncEditSubjectSplitup(subjid)
+{//alert(scheme);
+	
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divEditSubject').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?Subjid='+subjid, true);
+		XmlReg.send(null);
+}//EOF
+
+function fncPopulateComponentWindow(componentCnt)
+{
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divComponentWindow').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?ComponentCnt='+componentCnt, true);
+		XmlReg.send(null);
+}//EOF
+
+function fncPopulateWindowForNewSplitup()
+{
+	var p=1;
+	XmlReg = JSfncGetXMLHttpRequest();
+		if(!XmlReg)
+		{
+			alert('Ajax Not Supported');
+			return;
+		}
+
+		XmlReg.onreadystatechange = function(){
+
+			if (XmlReg.readyState == 4) {
+			if (XmlReg.status == 200) {
+				 //alert('div2'+divno);
+
+				document.getElementById('divWindowForNewSplitup').innerHTML = XmlReg.responseText;
+				if(document.getElementById('loading'))
+					document.getElementById('loading').style.display='none';
+			}
+		}else{
+			if(document.getElementById('loading'))
+				document.getElementById('loading').style.display='block';
+		}
+		};
+
+		
+		XmlReg.open('GET', 'getAdditionalAjaxdetails.php?addNewSplitup='+p, true);
+		XmlReg.send(null);
+}//EOF
+
+
+//---------------------NON Ajax Function 
+
+function chkAll(chkCntrl,cnt)
+{
+	var checkAll=document.getElementById(chkCntrl);
+	var cntVal=document.getElementById(cnt).value;
+	if(checkAll.checked==true)
+	{
+	for(var i=1;i<cntVal;i++)
+	{
+		var chkbx=document.getElementById("cosp"+i);
+		chkbx.checked=true;
+	}//End of for
+	}//end of if
+	else
+	{
+	for(var i=1;i<cntVal;i++)
+	{
+		var chkbx=document.getElementById("cosp"+i);
+		chkbx.checked=false;
+	}//end of for
+	}//End of else
+}//EOF
